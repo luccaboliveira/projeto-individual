@@ -35,15 +35,18 @@ body {
 .container {
     display: flex;
     background-color: #1129FF;
-    justify-content: center;
-}
-
-.banner .container {
-    gap: 200px
+    justify-content: space-evenly;
 }
 
 .container-texto{
     width: 40%;
+    align-self: center;
+    padding: 0px 0px 70px 0px;
+}
+
+.titulo {
+    font-size: 50px;
+    margin: auto;
 }
 
 .banner-imagem img {
@@ -52,6 +55,7 @@ body {
 
 .banner .container {
     height: 350px;
+    padding: 20px;
 }
 
 .btn-cadastro {
