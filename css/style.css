@@ -47,7 +47,22 @@ body {
 }
 
 .banner-imagem img {
-    height: 400px;
+    height: 100%;
 }
 
-  
+.banner .container {
+    height: 350px;
+}
+
+.btn-cadastro {
+    background-color: #ffffff;
+    color: #1129FF;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    padding: 5px 15px 5px 15px;
+    width: 150px;
+    height: 36px;
+    font-size: 17px;
+    font-family: "Inter", sans-serif;
+}
