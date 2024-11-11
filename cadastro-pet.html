@@ -13,22 +13,26 @@
 <body>
     <div class="header">
         <div class="container">
-            <div class="logo">
-                <img src="assets/logo-branco.png" alt="">
-            </div>
+            <a href="index.html">
+                <div class="logo">
+                    <img src="assets/logo-branco.png" alt="">
+                </div>
+            </a>
             <ul class="navbar">
-                <li>
-                    <a href="#" class="selecionado">Página inicial</a>
-                </li>
-                <li>
-                    <a href="#sobre">Sobre</a>
-                </li>
-                <li>
-                    <a href="cadastro.html">Cadastro</a>
-                </li>
-                <li>
-                    <a href="login.html">Login</a>
-                </li>
+                <ul class="navbar">
+                    <li>
+                        <a href="home-usuario.html" >Página inicial</a>
+                    </li>
+                    <li>
+                        <a href="perfil-pet.html">Pets</a>
+                    </li>
+                    <li>
+                        <a href="cadastro-pet.html" class="selecionado">Cadastrar pet</a>
+                    </li>
+                    <li>
+                        <a href="index.html">Sair</a>
+                    </li>
+                </ul>
             </ul>
         </div>
     </div>
@@ -50,7 +54,7 @@
                     <option value="F">Fêmea</option>
                 </select> <br>
 
-                <label for="iptTipo">Tipo do animal</label> <br>
+                <label for="selTipo">Tipo do animal</label> <br>
                 <select class="lista" id="selTipo">
                     <option value="#">Selecione uma opção</option>
                     <option value="1">Gato</option>

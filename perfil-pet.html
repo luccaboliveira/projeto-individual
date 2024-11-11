@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Perfil do pet</title>
 
-    <title>Login</title>
-
-    <script src="js/script.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="assets/logo-gato-branco.png" type="image/x-icon">
@@ -21,30 +20,29 @@
             </a>
             <ul class="navbar">
                 <li>
-                    <a href="index.html">Página inicial</a>
+                    <a href="home-usuario.html">Página inicial</a>
                 </li>
                 <li>
-                    <a href="index.html#sobre">Sobre</a>
+                    <a href="perfil-pet.html" class="selecionado">Pets</a>
                 </li>
                 <li>
-                    <a href="cadastro.html">Cadastro</a>
+                    <a href="cadastro-pet.html">Cadastrar pet</a>
                 </li>
                 <li>
-                    <a href="#" class="selecionado">Login</a>
+                    <a href="index.html">Sair</a>
                 </li>
             </ul>
         </div>
     </div>
 
-    <div class="login">
-
+    <div class="perfil">
         <div class="container">
             <div class="container-imagem">
                 <img src="assets/img-gato.png" alt="Imagem de um gato">
             </div>
+            <h1>Nome do pet</h1>
 
-            <div class="container-campos">
-                <h1>Entre na sua conta</h1>
+            <div class="container-texto">
                 <label for="iptEmail">E-mail</label> <br>
                 <input class="ipt-campo" type="text" id="iptEmail" placeholder="exemplo@dominio.com"> <br>
                 <label for="iptSenha">Senha</label> <br>
@@ -57,7 +55,6 @@
         </div>
     </div>
 
-
     <div class="footer">
         <div class="container">
             <div class="logo">
@@ -65,6 +62,5 @@
             </div>
         </div>
     </div>
-    
 </body>
 </html>

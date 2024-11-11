@@ -50,7 +50,7 @@ body {
 
 .container {
     display: flex;
-    background-color: #1129FF;
+    background-color: #F3F2FF;
     justify-content: space-evenly;
 }
 
@@ -70,6 +70,7 @@ body {
 }
 
 .banner .container {
+    background-color: #1129FF;
     height: 350px;
     padding: 20px;
 }
@@ -123,7 +124,7 @@ body {
 }
 
 .cadastro .container{
-    background-color: #F3F2FF;
+    /* background-color: #F3F2FF; */
     color: #0F1127;
 }
 
@@ -172,7 +173,7 @@ body {
     transition: 0.4s;
 }
 
-.btn-voltar{
+.btn-cinza{
     border: 1px solid #0F1127;
 }
 
@@ -184,7 +185,7 @@ body {
 }
 
 .login .container{
-    background-color: #F3F2FF;
+    /* background-color: #F3F2FF; */
     color: #0F1127;
 }
 
@@ -217,9 +218,14 @@ body {
     font-weight: 700;
 }
 
+.footer .container{
+    background-color: #1129FF;
+}
+
 .footer .logo {
     height: 35px;
 }
+
 
 .lista{
     width: 100%;
@@ -235,4 +241,46 @@ body {
 .lista:hover{
     border: 1px solid #1129FF;
     transition: 0.4s;
+}
+
+.home .container{
+    display: flex;
+    flex-direction: column;
+    color: #0F1127;
+    height: 20%;
+    /* background-color: #F3F2FF; */
+    padding: 0px 60px 0px 60px;
+    justify-content: space-between;
+}
+
+.home h1{
+    color: #1129FF;
+    font-weight: 700;
+}
+
+.perfil h1{
+    color: #1129FF;
+    font-weight: 700;
+}
+
+.btn-azul-linha{
+    border: 1px solid #1129FF;
+    color: #1129FF;
+    width: 190px;
+    font-size: 15px;
+}
+
+.home .card-pets{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.card-pets .card{
+    width: 20%;
+}
+
+.card img{
+    width: 70px;
 }
