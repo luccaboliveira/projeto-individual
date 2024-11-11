@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Página inicial</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="assets/logo-gato-branco.png" type="image/x-icon">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/logo-branco.png" alt="">
+            </div>
+            <ul class="navbar">
+                <li>
+                    <a href="#" class="selecionado">Página inicial</a>
+                </li>
+                <li>
+                    <a href="#sobre">Sobre</a>
+                </li>
+                <li>
+                    <a href="cadastro.html">Cadastro</a>
+                </li>
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="cadastro">
+        <div class="container">
+            <div class="container-campos">
+                <h1>Cadastre seu pet</h1>
+                <label for="iptPetNome">Nome</label> <br>
+                <input class="ipt-campo" type="text" id="iptPetNome" placeholder="Seu nome"> <br>
+                
+                <label for="iptDtNasc">Data de nascimento</label> <br>
+                <input class="ipt-campo" type="date" id="iptDtNasc"> <br>
+                
+                <label for="selSexo">Sexo</label> <br>
+                <select class="lista" id="selSexo">
+                    <option value="#">Selecione uma opção</option>
+                    <option value="M">Macho</option>
+                    <option value="F">Fêmea</option>
+                </select> <br>
+
+                <label for="iptTipo">Tipo do animal</label> <br>
+                <select class="lista" id="selTipo">
+                    <option value="#">Selecione uma opção</option>
+                    <option value="1">Gato</option>
+                    <option value="2">Cachorro</option>
+                    <option value="3">Pássaro</option>
+                    <option value="4">Hamster</option>
+                    <option value="5">Outro</option>
+                </select> <br>
+
+                <button class="botao btn-voltar" onclick="history.back()">Voltar</button>
+                <button class="botao btn-azul">Cadastrar</button>
+
+            </div>
+
+            <div class="container-imagem">
+                <img src="assets/img-cachorro.png" alt="Imagem de um gato">
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/logo-branco.png" alt="">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
