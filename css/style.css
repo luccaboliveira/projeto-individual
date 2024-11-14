@@ -284,3 +284,21 @@ body {
 .card img{
     width: 70px;
 }
+
+.div-tabela{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+table, th, td {
+    margin-top: 10px;
+    border: 1px solid
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+}
