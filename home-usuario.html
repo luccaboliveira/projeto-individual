@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>PetCare</title>
+    <title>Usuário - PetPlanner</title>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -23,9 +23,6 @@
                     <a href="home-usuario.html" class="selecionado">Página inicial</a>
                 </li>
                 <li>
-                    <a href="perfil-pet.html">Pets</a>
-                </li>
-                <li>
                     <a href="cadastro-pet.html">Cadastrar pet</a>
                 </li>
                 <li>
@@ -37,27 +34,52 @@
     
     <div class="home">
         <div class="container">
-            <h1>Bem vindo, (usuário)!</h1>
-            <a href="cadastro-pet.html"><button class="botao btn-azul-linha">Cadastrar novo pet</button></a>
-            <div class="listaAcoes">
-                <h3>Ações pendentes</h3>
-                <div>aaaaaaaaa</div>
+            <h1>Bem vindo, <span id="b_usuario">usuário</span>!</h1>
+            <div class="container-botao">
+                <a href="cadastro-pet.html"><button class="botao btn-azul-linha">Cadastrar novo pet</button></a>
+                <a href="#"><button class="botao btn-azul-linha">Acessar dashboard</button></a>
+            </div>
+            <div class="lista-tarefas">
+                <h2>Lista de tarefas</h2>
+                <div class="container-campos">
+                    <div class="campos-tarefa">
+                        <label for="ipt_categoria">Categoria</label>
+                        <input type="text" id="ipt_categoria" class="ipt-campo" placeholder="Categoria">
+                    </div>
+
+                    <div class="campos-tarefa">
+                        <label for="ipt_data">Data de conclusão</label>
+                        <input type="date" id="ipt_data" class="ipt-campo">
+                    </div>
+                    
+                    <div class="campos-tarefa">
+                        <label for="ipt_animal">Pet</label>
+                        <input type="text" id="ipt_animal" class="ipt-campo" placeholder="Pet">
+                    </div>
+
+                    <button class="botao btn-azul btn-tarefa" onclick="adicionar()">Cadastrar nova tarefa</button>
+                </div>
+
+                <div class="div-tabela">
+                <table id="tabela">
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Animal</th>
+                            <th>Status</th>
+                        </tr>
+                </table> 
+                <p id="p_mensagem">Insira uma tarefa nos campos acima!</p>
+            </div>
             </div>
 
+            <h2>Seus pets</h2>
             <div class="card-pets">
                 <div class="card">
-                    <img src="assets/img-gato.png">
+                    <div class="img">
+                        <img src="assets/exemplo-gato.png" alt="">
+                    </div>
                     <h1>Nome do pet</h1>
-                </div>
-
-                <div class="card">
-                    <img src="assets/img-gato.png">
-                    <h1>Nome do pet 2</h1>
-                </div>
-
-                <div class="card">
-                    <img src="assets/img-gato.png">
-                    <h1>Nome do pet 3</h1>
                 </div>
 
             </div>
@@ -73,3 +95,31 @@
     </div>
 </body>
 </html>
+<script>
+    function adicionar(){
+        p_mensagem.innerHTML = ``
+
+        // seleciona o elemento com id tabela no html
+        var tabelaTarefas = document.getElementById('tabela') 
+        
+        // insere linha na tabela = parametro -1 garante que a linha vai sempre na ultima posiçao
+        var linha = tabelaTarefas.insertRow(-1)
+
+        // insere celula na posiçao 0 (tipo) da linha
+        var celulaCategoria = linha.insertCell(0)
+        var celulaData = linha.insertCell(1)
+        var celulaAnimal = linha.insertCell(2)
+        var celulaStatus = linha.insertCell(3)
+
+        // preenche as celulas de acordo com as entradas do usuário
+        celulaCategoria.innerText = ipt_categoria.value
+        celulaData.innerText = ipt_data.value
+        celulaAnimal.innerText = ipt_animal.value
+        celulaStatus.innerHTML = `
+        <select class="lista" id="select_status">
+            <option value="1">Pendente</option>
+            <option value="2">Concluído</option>
+            </select>
+        `
+    }
+</script>

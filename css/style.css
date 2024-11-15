@@ -90,7 +90,7 @@ body {
 
 .btn-branco {
     background-color: #ffffff;
-    color: #1129FF;
+    color: #2d3dcf;
 }
 
 #sobre {
@@ -101,7 +101,7 @@ body {
 }
 
 #sobre h1{
-    color: #1129FF;
+    color: #2d3dcf;
 }
 
 .container-cards{
@@ -131,7 +131,7 @@ body {
 .cadastro h1{
     display: flex;
     margin-bottom: 20px;
-    color: #1129FF;
+    color: #2d3dcf;
     justify-content: center;
 }
 
@@ -166,6 +166,7 @@ body {
     border: 1px solid #0F1127;
     border-radius: 2px;
     margin: 5px 0px 10px 0px;
+    font-family: "Inter", sans-serif;
 }
 
 .ipt-campo:hover{
@@ -192,7 +193,7 @@ body {
 .login h1{
     display: flex;
     margin-bottom: 20px;
-    color: #1129FF;
+    color: #2d3dcf;
     justify-content: center;
 }
 
@@ -214,7 +215,7 @@ body {
 
 .link{
     text-decoration: none;
-    color: #1129FF;
+    color: #2d3dcf;
     font-weight: 700;
 }
 
@@ -236,6 +237,7 @@ body {
     border: 1px solid #0F1127;
     border-radius: 2px;
     margin: 5px 0px 10px 0px;
+    font-family: 'Inter', sans-serif;
 }
 
 .lista:hover{
@@ -254,18 +256,17 @@ body {
 }
 
 .home h1{
-    color: #1129FF;
     font-weight: 700;
 }
 
 .perfil h1{
-    color: #1129FF;
+    color: #2d3dcf;
     font-weight: 700;
 }
 
 .btn-azul-linha{
-    border: 1px solid #1129FF;
-    color: #1129FF;
+    border: 1px solid #2d3dcf;
+    color: #2d3dcf;
     width: 190px;
     font-size: 15px;
 }
@@ -274,31 +275,78 @@ body {
     display: flex;
     gap: 20px;
     justify-content: center;
-    margin-bottom: 30px;
+    margin: 30px 0px 30px 0px;
 }
 
+.home .botao{
+    width: fit-content;
+}
+
+
+/* .lista-tarefas{
+    margin-top: 20px;
+    background-color: #ffffff;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px;
+} */
+
 .card-pets .card{
-    width: 20%;
+    height: 40%;
+    padding: 15px;
+    text-align: center;
 }
 
 .card img{
-    width: 70px;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .div-tabela{
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
-table, th, td {
+#tabela {
     margin-top: 10px;
-    border: 1px solid
+    border: 1px solid;
+    width: 85%;
+    border-collapse: collapse;
+    text-align: left;
 }
 
-table {
-    width: 80%;
-    border-collapse: collapse;
+#tarefa, th, td {
+    padding: 7px;
+    border: 1px solid #0F1127;
+    background-color: #ffffff;
+}
+
+#tarefa, th{
+    font-weight: 600;
+}
+
+.btn-tarefa{
+    font-size: 14px;
+    height: fit-content;
+    width: fit-content;
+    margin: 0;
+    align-self: center;
+}
+
+.lista-tarefas .container-campos{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.campos-tarefa{
+    display: flex;
+    flex-direction: column;
+}
+
+#p_mensagem{
+    margin: 10px 0px 0px 0px;
+    color: #646680;
 }
