@@ -46,6 +46,11 @@
                         <label for="ipt_categoria">Categoria</label>
                         <input type="text" id="ipt_categoria" class="ipt-campo" placeholder="Categoria">
                     </div>
+                    
+                    <div class="campos-tarefa">
+                        <label for="ipt_descricao">Descrição</label>
+                        <input type="text" id="ipt_descricao" class="ipt-campo" placeholder="Descrição">
+                    </div>
 
                     <div class="campos-tarefa">
                         <label for="ipt_data">Data de conclusão</label>
@@ -64,6 +69,7 @@
                 <table id="tabela">
                         <tr>
                             <th>Categoria</th>
+                            <th>Descrição</th>
                             <th>Data</th>
                             <th>Animal</th>
                             <th>Status</th>
@@ -107,18 +113,20 @@
 
         // insere celula na posiçao 0 (tipo) da linha
         var celulaCategoria = linha.insertCell(0)
-        var celulaData = linha.insertCell(1)
-        var celulaAnimal = linha.insertCell(2)
-        var celulaStatus = linha.insertCell(3)
+        var celulaDescricao = linha.insertCell(1)
+        var celulaData = linha.insertCell(2)
+        var celulaAnimal = linha.insertCell(3)
+        var celulaStatus = linha.insertCell(4)
 
         // preenche as celulas de acordo com as entradas do usuário
         celulaCategoria.innerText = ipt_categoria.value
+        celulaDescricao.innerText = ipt_descricao.value
         celulaData.innerText = ipt_data.value
         celulaAnimal.innerText = ipt_animal.value
         celulaStatus.innerHTML = `
         <select class="lista" id="select_status">
-            <option value="1">Pendente</option>
-            <option value="2">Concluído</option>
+            <option value="">Pendente</option>
+            <option value="">Concluído</option>
             </select>
         `
     }
