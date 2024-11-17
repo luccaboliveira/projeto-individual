@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="assets/logo-gato-branco.png" type="image/x-icon">
 </head>
+
 <body>
     <div class="header">
         <div class="container">
@@ -36,21 +38,31 @@
     <div class="cadastro">
         <div class="container">
             <div class="container-campos">
+
                 <h1>Cadastre-se</h1>
-                <label for="iptNome">Nome</label> <br>
-                <input class="ipt-campo" type="text" id="iptNome" placeholder="Seu nome"> <br>
 
-                <label for="iptEmail">E-mail</label> <br>
-                <input class="ipt-campo" type="text" id="iptEmail" placeholder="exemplo@dominio.com"> <br>
+                <div id="mensagem_cadastro" class="mensagem"></div>
 
-                <label for="iptSenha">Senha</label> <br>
-                <input class="ipt-campo" type="password" id="iptSenha" placeholder="*******"> <br>
+                <label for="ipt_nome">Nome</label> <br>
+                <input class="ipt-campo" type="text" id="ipt_nome" placeholder="Seu nome"> <br>
 
-                <label for="iptConfirmaSenha">Confirme a senha:</label> <br>
-                <input class="ipt-campo" type="password" id="iptConfirmaSenha" placeholder="*******"> <br>
-                
+                <label for="ipt_email">E-mail</label> <br>
+                <input class="ipt-campo" type="text" id="ipt_email" placeholder="exemplo@dominio.com"
+                    oninput="validarEmail()"> <br>
+                <div id="email_msg" class="mensagem_erro"></div>
+
+                <label for="ipt_senha">Senha</label> <br>
+                <input class="ipt-campo" type="password" id="ipt_senha" placeholder="*******" oninput="validarSenha()">
+                <br>
+                <div id="senha_msg" class="mensagem_erro"></div>
+
+                <label for="ipt_confirma_senha">Confirme a senha:</label> <br>
+                <input class="ipt-campo" type="password" id="ipt_confirma_senha" placeholder="*******"
+                    oninput="validarConfirmacaoSenha()"> <br>
+                <div id="confirmacao_msg" class="mensagem_erro"></div>
+
                 <button class="botao btn-cinza" onclick="history.back()">Voltar</button>
-                <button class="botao btn-azul">Cadastre-se</button>
+                <button class="botao btn-azul" onclick="cadastrar()">Cadastre-se</button>
 
                 <p>Já tem uma conta? <a class="link" href="login.html"> Entre</a></p>
             </div>
@@ -70,4 +82,79 @@
         </div>
     </div>
 </body>
+
 </html>
+
+<script>
+
+    function validarEmail() {
+        var emailVar = ipt_email.value
+        var emailValido = emailVar.includes('@') && emailVar.length >= 5
+
+        if (emailValido) {
+            email_msg.innerHTML = ``
+        } else {
+            email_msg.innerHTML = `E-mail inválido! O e-mail deve conter um '@' e pelo menos 5 caracteres`
+        }
+
+    }
+
+    function validarSenha() {
+        var senhaVar = ipt_senha.value
+
+    }
+
+    function cadastrar() {
+        var nomeVar = ipt_nome.value
+        var emailVar = ipt_email.value
+        var senhaVar = ipt_senha.value
+        var confirmacaoSenhaVar = ipt_confirma_senha.value
+
+        if (
+            nomeVar == "" ||
+            emailVar == "" ||
+            senhaVar == "" ||
+            confirmacaoSenhaVar == ""
+        ) {
+            mensagem_cadastro.innerHTML =
+                "Preencha todos os campos!";
+
+            return false;
+        }
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    mensagem_cadastro.innerHTML =
+                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
+
+                    limparFormulario();
+                    // finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                //   finalizarAguardar();
+            });
+
+        return false;
+    }
+
+</script>

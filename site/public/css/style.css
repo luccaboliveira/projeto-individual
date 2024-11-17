@@ -350,3 +350,14 @@ body {
     margin: 10px 0px 0px 0px;
     color: #646680;
 }
+
+.mensagem{
+    text-align: center;
+    font-weight: 600;
+}
+
+.mensagem_erro{
+    font-size: 12px;
+    color: #bc1414;
+    text-align: center;
+}
