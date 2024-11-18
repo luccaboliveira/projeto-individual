@@ -347,13 +347,13 @@ body {
 .mensagem{
     text-align: center;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .mensagem_erro{
     font-size: 13px;
     color: #bc1414;
     text-align: center;
-    margin-bottom: 10px;
 }
 
 .container-botoes{
