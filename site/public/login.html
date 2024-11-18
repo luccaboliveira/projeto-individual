@@ -113,17 +113,16 @@
 
                     setTimeout(function () {
                         window.location = "home-usuario.html";
-                    }, 1000); // apenas para exibir o loading
+                    }, 1000);
 
                 });
 
             } else {
-
+                mensagem_login.innerHTML = `Houve um erro ao realizar o login. Verifique as informações inseridas.`
                 console.log("Houve um erro ao tentar realizar o login!");
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
                 });
             }
 

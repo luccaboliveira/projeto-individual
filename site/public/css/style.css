@@ -283,13 +283,6 @@ body {
 }
 
 
-/* .lista-tarefas{
-    margin-top: 20px;
-    background-color: #ffffff;
-    padding: 5px 15px 5px 15px;
-    border-radius: 5px;
-} */
-
 .card-pets .card{
     height: 40%;
     padding: 15px;
@@ -357,7 +350,8 @@ body {
 }
 
 .mensagem_erro{
-    font-size: 12px;
+    font-size: 14px;
     color: #bc1414;
     text-align: center;
+    margin-bottom: 10px;
 }

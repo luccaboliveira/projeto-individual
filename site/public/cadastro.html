@@ -48,18 +48,18 @@
 
                 <label for="ipt_email">E-mail</label> <br>
                 <input class="ipt-campo" type="text" id="ipt_email" placeholder="exemplo@dominio.com"
-                    oninput="validarEmail()"> <br>
-                <div id="email_msg" class="mensagem_erro"></div>
+                    oninput="validarCampo()"> <br>
+                <div id="email_msg" class="mensagem mensagem_erro"></div>
 
                 <label for="ipt_senha">Senha</label> <br>
-                <input class="ipt-campo" type="password" id="ipt_senha" placeholder="*******" oninput="validarSenha()">
+                <input class="ipt-campo" type="password" id="ipt_senha" placeholder="*******" oninput="validarCampo()">
                 <br>
-                <div id="senha_msg" class="mensagem_erro"></div>
+                <div id="senha_msg" class="mensagem mensagem_erro"></div>
 
                 <label for="ipt_confirma_senha">Confirme a senha:</label> <br>
                 <input class="ipt-campo" type="password" id="ipt_confirma_senha" placeholder="*******"
-                    oninput="validarConfirmacaoSenha()"> <br>
-                <div id="confirmacao_msg" class="mensagem_erro"></div>
+                    oninput="validarCampo()"> <br>
+                <div id="confirmacao_msg" class="mensagem mensagem_erro"></div>
 
                 <button class="botao btn-cinza" onclick="history.back()">Voltar</button>
                 <button class="botao btn-azul" onclick="cadastrar()">Cadastre-se</button>
@@ -86,23 +86,46 @@
 </html>
 
 <script>
+    var camposValidos = false
 
-    function validarEmail() {
+    function validarCampo() {
         var emailVar = ipt_email.value
         var emailValido = emailVar.includes('@') && emailVar.length >= 5
 
+        var senhaVar = ipt_senha.value
+        var senhaValida = senhaVar.length >= 8 && senhaVar.toLowerCase() != senhaVar.toUpperCase()
+
+        var confirmacaoSenhaVar = ipt_confirma_senha.value
+        var confirmacaoValida = confirmacaoSenhaVar == senhaVar
+
+
         if (emailValido) {
             email_msg.innerHTML = ``
+            camposValidos = true
         } else {
             email_msg.innerHTML = `E-mail inválido! O e-mail deve conter um '@' e pelo menos 5 caracteres`
+            camposValidos = false
         }
 
+        if (senhaValida) {
+            senha_msg.innerHTML = ``
+            camposValidos = true
+
+        } else {
+            senha_msg.innerHTML = `Senha inválida! A senha deve conter 8 ou mais caracteres, uma letra maiúscula e uma letra minúscula.`
+            camposValidos = false
+        }
+
+        if (confirmacaoValida) {
+            confirmacao_msg.innerHTML = ``
+            camposValidos = true
+
+        } else {
+            confirmacao_msg.innerHTML = `As senhas devem ser iguais.`
+            camposValidos = false
+        }
     }
 
-    function validarSenha() {
-        var senhaVar = ipt_senha.value
-
-    }
 
     function cadastrar() {
         var nomeVar = ipt_nome.value
@@ -110,51 +133,50 @@
         var senhaVar = ipt_senha.value
         var confirmacaoSenhaVar = ipt_confirma_senha.value
 
-        if (
-            nomeVar == "" ||
-            emailVar == "" ||
-            senhaVar == "" ||
-            confirmacaoSenhaVar == ""
-        ) {
-            mensagem_cadastro.innerHTML =
-                "Preencha todos os campos!";
+        if (camposValidos) {
 
-            return false;
-        }
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
-
-                if (resposta.ok) {
-                    mensagem_cadastro.innerHTML =
-                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                    setTimeout(() => {
-                        window.location = "login.html";
-                    }, "2000");
-
-                    limparFormulario();
-                    // finalizarAguardar();
-                } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                }),
             })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-                //   finalizarAguardar();
-            });
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
 
-        return false;
+                    if (resposta.ok) {
+                        mensagem_cadastro.innerHTML =
+                            "Cadastro realizado com sucesso! Redirecionando para tela de login...";
+
+                        setTimeout(() => {
+                            window.location = "login.html";
+                        }, "2000");
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+                
+                return false;
+                
+        } else {
+            mensagem_cadastro.innerHTML = "Houve um erro ao realizar o cadastro. Verifique as informações inseridas.";
+            
+            if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+                mensagem_cadastro.innerHTML = "Preencha todos os campos!";
+                return false;
+            }
+            
+            throw "Houve um erro ao tentar realizar o cadastro!";
+        }
     }
-
+    
+    
+    
+    
 </script>
