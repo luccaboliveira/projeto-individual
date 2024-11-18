@@ -61,8 +61,10 @@
                     oninput="validarCampo()"> <br>
                 <div id="confirmacao_msg" class="mensagem mensagem_erro"></div>
 
-                <button class="botao btn-cinza" onclick="history.back()">Voltar</button>
-                <button class="botao btn-azul" onclick="cadastrar()">Cadastre-se</button>
+                <div class="container-botoes">
+                    <button class="botao btn-cinza" onclick="history.back()">Voltar</button>
+                    <button class="botao btn-azul" onclick="cadastrar()">Cadastre-se</button>
+                </div>
 
                 <p>Já tem uma conta? <a class="link" href="login.html"> Entre</a></p>
             </div>
@@ -93,7 +95,9 @@
         var emailValido = emailVar.includes('@') && emailVar.length >= 5
 
         var senhaVar = ipt_senha.value
-        var senhaValida = senhaVar.length >= 8 && senhaVar.toLowerCase() != senhaVar.toUpperCase()
+        var senhaMinuscula = senhaVar.toLowerCase() 
+        var senhaMaiuscula =  senhaVar.toUpperCase()
+        var senhaValida = (senhaVar.length >= 8)  && senhaVar != senhaMinuscula && senhaVar != senhaMaiuscula
 
         var confirmacaoSenhaVar = ipt_confirma_senha.value
         var confirmacaoValida = confirmacaoSenhaVar == senhaVar
@@ -110,16 +114,14 @@
         if (senhaValida) {
             senha_msg.innerHTML = ``
             camposValidos = true
-
         } else {
-            senha_msg.innerHTML = `Senha inválida! A senha deve conter 8 ou mais caracteres, uma letra maiúscula e uma letra minúscula.`
+            senha_msg.innerHTML = `Senha inválida! A senha deve conter 8 ou mais caracteres, e pelo menos uma letra maiúscula e uma letra minúscula.`
             camposValidos = false
         }
 
         if (confirmacaoValida) {
             confirmacao_msg.innerHTML = ``
             camposValidos = true
-
         } else {
             confirmacao_msg.innerHTML = `As senhas devem ser iguais.`
             camposValidos = false

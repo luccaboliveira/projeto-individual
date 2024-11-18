@@ -350,8 +350,13 @@ body {
 }
 
 .mensagem_erro{
-    font-size: 14px;
+    font-size: 13px;
     color: #bc1414;
     text-align: center;
     margin-bottom: 10px;
+}
+
+.container-botoes{
+    display: flex;
+    justify-content: center;
 }
