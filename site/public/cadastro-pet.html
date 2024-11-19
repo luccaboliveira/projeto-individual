@@ -38,21 +38,21 @@
         <div class="container">
             <div class="container-campos">
                 <h1>Cadastre seu pet</h1>
-                <label for="iptPetNome">Nome</label> <br>
-                <input class="ipt-campo" type="text" id="iptPetNome" placeholder="Nome do seu pet"> <br>
+                <label for="ipt_pet_nome">Nome</label> <br>
+                <input class="ipt-campo" type="text" id="ipt_pet_nome" oninput="validarCampos()" placeholder="Nome do seu pet"> <br>
                 
-                <label for="iptDtNasc">Data de nascimento</label> <br>
-                <input class="ipt-campo" type="date" id="iptDtNasc"> <br>
+                <label for="ipt_dt_nasc">Data de nascimento</label> <br>
+                <input class="ipt-campo" type="date" id="ipt_dt_nasc" oninput="validarCampos()"> <br>
                 
-                <label for="selSexo">Sexo</label> <br>
-                <select class="lista" id="selSexo">
+                <label for="sel_sexo">Sexo</label> <br>
+                <select class="lista" id="sel_sexo">
                     <option value="#">Selecione uma opção</option>
                     <option value="M">Macho</option>
                     <option value="F">Fêmea</option>
                 </select> <br>
 
-                <label for="selTipo">Tipo do animal</label> <br>
-                <select class="lista" id="selTipo">
+                <label for="sel_tipo">Tipo do animal</label> <br>
+                <select class="lista" id="sel_tipo">
                     <option value="#">Selecione uma opção</option>
                     <option value="">Gato</option>
                     <option value="">Cachorro</option>
@@ -62,7 +62,7 @@
                 </select> <br>
 
                 <button class="botao btn-cinza" onclick="history.back()">Voltar</button>
-                <button class="botao btn-azul">Cadastrar</button>
+                <button class="botao btn-azul" onclick="cadastrarPet()">Cadastrar</button>
 
             </div>
 
@@ -84,3 +84,41 @@
 
 </body>
 </html>
+<script>
+    var camposValidos = false
+
+    function validarCampos(){
+        var nomePetVar = ipt_pet_nome.value
+        var nomePetValido = nomePetVar.length >= 2
+
+        var dtNascVar = ipt_dt_nasc.value
+
+        var sexoVar =  sel_sexo.value
+        var sexoValido = sexoVar != '#'
+        
+        var tipoVar = sel_tipo.value
+        var tipoValido = tipoVar != '#' 
+
+        if(nomePetValido){
+            camposValidos = true
+        } else {
+            camposValidos = false
+        }
+        
+        if(nomePetValido){
+            camposValidos = true
+        } else {
+            camposValidos = false
+        }
+
+    }
+
+    function cadastrarPet(){
+        var nomePetVar = ipt_pet_nome.value
+        var dtNascVar = ipt_dt_nasc.value
+        var sexoVar =  sel_sexo.value
+        var tipoVar = sel_tipo.value
+
+    }
+
+</script>
