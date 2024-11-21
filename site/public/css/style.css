@@ -6,15 +6,15 @@ body {
     padding: 0;
     color: #ffffff;
     background-color: #1129FF;
-  }
+}
 
 
-.logo{
+.logo {
     padding: 15px;
     height: 50px;
 }
 
-.logo img{
+.logo img {
     height: 100%;
 }
 
@@ -38,10 +38,25 @@ body {
 .navbar {
     width: 300px;
     display: flex;
-      align-items: center;
-      justify-content: space-between;
-      list-style: none;
-      color: #ffffff;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    color: #ffffff;
+}
+
+.btn-sair {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #1129FF;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    border-style: none;
+    font-size: 16px;
+}
+
+.btn-sair:hover {
+    font-weight: 700;
+    transition: 0.4s;
 }
 
 .selecionado {
@@ -54,7 +69,7 @@ body {
     justify-content: space-evenly;
 }
 
-.banner .container-texto{
+.banner .container-texto {
     width: 40%;
     align-self: center;
     padding: 0px 0px 70px 0px;
@@ -75,7 +90,7 @@ body {
     padding: 20px;
 }
 
-.botao{
+.botao {
     cursor: pointer;
     font-weight: 600;
     border: none;
@@ -100,18 +115,18 @@ body {
     border-radius: 30px 30px 0px 0px;
 }
 
-#sobre h1{
+#sobre h1 {
     color: #2d3dcf;
 }
 
-.container-cards{
+.container-cards {
     display: flex;
     gap: 40px;
     justify-content: center;
     margin: 30px 0px;
 }
 
-.card{
+.card {
     padding: 10px 30px 10px 30px;
     background-color: #ffffff;
     border-radius: 20px;
@@ -119,16 +134,16 @@ body {
     box-shadow: 5px 5px 5px hsla(235, 44%, 11%, 0.24);
 }
 
-.card h1{
+.card h1 {
     font-size: 20px;
 }
 
-.cadastro .container{
+.cadastro .container {
     /* background-color: #F3F2FF; */
     color: #0F1127;
 }
 
-.cadastro h1{
+.cadastro h1 {
     display: flex;
     margin-bottom: 20px;
     color: #2d3dcf;
@@ -140,7 +155,7 @@ body {
     color: #ffffff;
 }
 
-.cadastro .container{
+.cadastro .container {
     display: flex;
     justify-content: center;
     gap: 150px;
@@ -152,12 +167,12 @@ body {
     height: 400px;
 }
 
-.container-campos{
+.container-campos {
     height: 100%;
     justify-items: center;
 }
 
-.ipt-campo{
+.ipt-campo {
     width: 100%;
     height: 20px;
     padding: 5px;
@@ -169,28 +184,28 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-.ipt-campo:hover{
+.ipt-campo:hover {
     border: 1px solid #1129FF;
     transition: 0.4s;
 }
 
-.btn-cinza{
+.btn-cinza {
     border: 1px solid #0F1127;
 }
 
-.login .container{
+.login .container {
     display: flex;
     justify-content: center;
     gap: 150px;
     align-items: center;
 }
 
-.login .container{
+.login .container {
     /* background-color: #F3F2FF; */
     color: #0F1127;
 }
 
-.login h1{
+.login h1 {
     display: flex;
     margin-bottom: 20px;
     color: #2d3dcf;
@@ -203,23 +218,23 @@ body {
 }
 
 
-.cadastro p{
+.cadastro p {
     display: flex;
     justify-content: center;
 }
 
-.login p{
+.login p {
     display: flex;
     justify-content: center;
 }
 
-.link{
+.link {
     text-decoration: none;
     color: #2d3dcf;
     font-weight: 700;
 }
 
-.footer .container{
+.footer .container {
     background-color: #1129FF;
 }
 
@@ -228,7 +243,7 @@ body {
 }
 
 
-.lista{
+.lista {
     width: 100%;
     height: 30px;
     padding: 5px;
@@ -240,12 +255,12 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-.lista:hover{
+.lista:hover {
     border: 1px solid #1129FF;
     transition: 0.4s;
 }
 
-.home .container{
+.home .container {
     display: flex;
     flex-direction: column;
     color: #0F1127;
@@ -255,46 +270,46 @@ body {
     justify-content: space-between;
 }
 
-.home h1{
+.home h1 {
     font-weight: 700;
 }
 
-.perfil h1{
+.perfil h1 {
     color: #2d3dcf;
     font-weight: 700;
 }
 
-.btn-azul-linha{
+.btn-azul-linha {
     border: 1px solid #2d3dcf;
     color: #2d3dcf;
     width: 190px;
     font-size: 15px;
 }
 
-.home .card-pets{
+.home .card-pets {
     display: flex;
     gap: 20px;
     justify-content: center;
     margin: 30px 0px 30px 0px;
 }
 
-.home .botao{
+.home .botao {
     width: fit-content;
 }
 
 
-.card-pets .card{
+.card-pets .card {
     height: 40%;
     padding: 15px;
     text-align: center;
 }
 
-.card img{
+.card img {
     width: 100%;
     border-radius: 10px;
 }
 
-.div-tabela{
+.div-tabela {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -311,17 +326,20 @@ body {
     text-align: left;
 }
 
-#tarefa, th, td {
+#tarefa,
+th,
+td {
     padding: 7px;
     border: 1px solid #0F1127;
     background-color: #ffffff;
 }
 
-#tarefa, th{
+#tarefa,
+th {
     font-weight: 600;
 }
 
-.btn-tarefa{
+.btn-tarefa {
     font-size: 14px;
     height: fit-content;
     width: fit-content;
@@ -329,34 +347,34 @@ body {
     align-self: center;
 }
 
-.lista-tarefas .container-campos{
+.lista-tarefas .container-campos {
     display: flex;
     justify-content: space-evenly;
 }
 
-.campos-tarefa{
+.campos-tarefa {
     display: flex;
     flex-direction: column;
 }
 
-#p_mensagem{
+#p_mensagem {
     margin: 10px 0px 0px 0px;
     color: #646680;
 }
 
-.mensagem{
+.mensagem {
     text-align: center;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
-.mensagem_erro{
+.mensagem_erro {
     font-size: 13px;
     color: #bc1414;
     text-align: center;
 }
 
-.container-botoes{
+.container-botoes {
     display: flex;
     justify-content: center;
 }
