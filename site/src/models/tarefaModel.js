@@ -19,11 +19,11 @@ function listarPet(fkUsuario){
     return database.executar(instrucaoSql);
 }
 
-function procurarTarefaPorDono(fkUsuario) {
+function listarTarefa(fkUsuario) {
     var instrucaoSql = `
         select id_tarefa, categoria, descricao, data_final, p.nome, status_atual
-	FROM tarefa
-	JOIN pet AS p
+	    FROM tarefa
+	    JOIN pet AS p
 		ON id_pet = fk_pet
 			WHERE tarefa.fk_usuario = ${fkUsuario};
     `;
@@ -31,7 +31,8 @@ function procurarTarefaPorDono(fkUsuario) {
     return database.executar(instrucaoSql);
 }
 
+
 module.exports = {
-    procurarTarefaPorDono,
+    listarTarefa,
     listarPet
 };

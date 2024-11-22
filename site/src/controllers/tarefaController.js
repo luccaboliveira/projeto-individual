@@ -20,27 +20,29 @@ function listarPet(req, res){
 
 }
 
-function procurarTarefaPorDono(req, res) {
+function listarTarefa(req, res) {
     var fkUsuario = req.body.fkUsuarioServer;
 
     if (fkUsuario == undefined) {
         res.status(400).send("A fkUsuario está indefinida!");
     } else {
-        tarefaModel.procurarTarefaPorDono(fkUsuario)
+        tarefaModel.listarTarefa(fkUsuario)
             .then(
                 function (resultadoAutenticar) {
                     console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
                     console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
                     if (resultadoAutenticar.length > 0) {
-                        res.json({
-                            id_tarefa: resultadoAutenticar[0].id_tarefa,
-                            categoria: resultadoAutenticar[0].categoria,
-                            descricao: resultadoAutenticar[0].descricao,
-                            data_final: resultadoAutenticar[0].data_final,
-                            nome: resultadoAutenticar[0].nome,
-                            status_atual: resultadoAutenticar[0].status_atual
-                        });
+                        res.json(resultadoAutenticar)
+                            // {
+                            //     id_tarefa: resultadoAutenticar[0].id_tarefa,
+                            //     categoria: resultadoAutenticar[0].categoria,
+                            //     descricao: resultadoAutenticar[0].descricao,
+                            //     data_final: resultadoAutenticar[0].data_final,
+                            //     nome: resultadoAutenticar[0].nome,
+                            //     status_atual: resultadoAutenticar[0].status_atual
+                            // }
+                        
                     } else {
                         res.status(401).send("Nenhuma tarefa cadastrada!");
                     }
@@ -59,6 +61,6 @@ function procurarTarefaPorDono(req, res) {
 }
 
 module.exports = {
-    procurarTarefaPorDono,
+    listarTarefa,
     listarPet
 }

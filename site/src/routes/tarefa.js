@@ -3,8 +3,8 @@ var router = express.Router();
 
 var tarefaController = require("../controllers/tarefaController");
 
-router.post("/procurarTarefaPorDono", function (req, res) {
-    tarefaController.procurarTarefaPorDono(req, res);
+router.post("/listarTarefa", function (req, res) {
+    tarefaController.listarTarefa(req, res);
 })
 
 router.post("/listarPet", function (req, res) {

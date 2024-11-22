@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="assets/logo-gato-branco.png" type="image/x-icon">
 </head>
 
-<body onload="listarPet()">
+<body onload="listarPet(), listarTarefa()">
     <div class="header">
         <div class="container">
             <a href="index.html">
@@ -185,7 +185,7 @@
     function listarTarefa() {
         var id_usuario = sessionStorage.ID_USUARIO
 
-        fetch("/tarefa/procurarTarefaPorDono", {
+        fetch("/tarefa/listarTarefa", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -194,43 +194,48 @@
                 fkUsuarioServer: id_usuario
             })
         }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
+            console.log("ESTOU NO THEN DO listarTarefa()!")
 
             if (resposta.ok) {
                 console.log(resposta);
 
                 resposta.json().then(json => {
-                    var id_tarefa = json.id_tarefa
-                    var categoria = json.categoria
-                    var descricao = json.descricao
-                    var data_final = json.data_final
-                    var nome = json.nome
-                    var status_atual = json.status_atual
-
                     // seleciona o elemento com id tabela no html
                     var tabelaTarefas = document.getElementById('tabela')
 
-                    // insere linha na tabela = parametro -1 garante que a linha vai sempre na ultima posiçao
-                    var linha = tabelaTarefas.insertRow(-1)
+                    var tamanho_lista = json.length;
 
-                    // insere celula na posiçao 0 (tipo) da linha
-                    var celulaCategoria = linha.insertCell(0)
-                    var celulaDescricao = linha.insertCell(1)
-                    var celulaData = linha.insertCell(2)
-                    var celulaAnimal = linha.insertCell(3)
-                    var celulaStatus = linha.insertCell(4)
-
-                    // preenche as celulas de acordo com as entradas do usuário
-                    celulaCategoria.innerText = categoria
-                    celulaDescricao.innerText = descricao
-                    celulaData.innerText = data_final
-                    celulaAnimal.innerText = nome
-                    celulaStatus.innerHTML = `
-                    <select class="lista" onchange="atualizarStatus(${id_tarefa})" id="select_status${id_tarefa}">
-                        <option>Pendente</option>
-                        <option>Concluído</option>
-                    </select>
-        `
+                    for (var i = 0; i < tamanho_lista; i++) {
+                        var id_tarefa = json[i].id_tarefa
+                        var categoria = json[i].categoria
+                        var descricao = json[i].descricao
+                        var data = json[i].data_final
+                        var data_final = data.slice(0,10)
+                        var nome = json[i].nome
+                        var status_atual = json[i].status_atual
+                        
+                        // insere linha na tabela = parametro -1 garante que a linha vai sempre na ultima posiçao
+                        var linha = tabelaTarefas.insertRow(-1)
+    
+                        // insere celula na posiçao 0 (tipo) da linha
+                        var celulaCategoria = linha.insertCell(0)
+                        var celulaDescricao = linha.insertCell(1)
+                        var celulaData = linha.insertCell(2)
+                        var celulaAnimal = linha.insertCell(3)
+                        var celulaStatus = linha.insertCell(4)
+    
+                        // preenche as celulas de acordo com as entradas do usuário
+                        celulaCategoria.innerText = categoria
+                        celulaDescricao.innerText = descricao
+                        celulaData.innerText = data_final
+                        celulaAnimal.innerText = nome
+                        celulaStatus.innerHTML = `
+                        <select class="lista" onchange="atualizarStatus(${id_tarefa})" id="select_status${id_tarefa}">
+                            <option>Pendente</option>
+                            <option>Concluído</option>
+                        </select>
+                        `
+                    }
 
                 });
 
