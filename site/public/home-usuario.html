@@ -259,4 +259,37 @@
         sessionStorage.clear();
         window.location = "../login.html";
     }
+
+
+
+    function atualizarStatus(idTarefa) {
+
+        var id_tarefa = idTarefa
+        var status_atual = document.getElementById(`select_status${id_tarefa}`).value
+
+        fetch("/tarefa/atualizarStatus", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idTarefaServer: id_tarefa,
+                statusAtualServer: status_atual
+            })
+
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+                if (resposta.ok) {
+                    console.log(resposta)
+                } else {
+                    console.log('Erro ao atualizar!');
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
 </script>

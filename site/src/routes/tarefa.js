@@ -11,4 +11,8 @@ router.post("/listarPet", function (req, res) {
     tarefaController.listarPet(req, res);
 })
 
+router.put("/atualizarStatus", function (req, res) {
+    tarefaController.atualizarStatus(req, res);
+})
+
 module.exports = router;
