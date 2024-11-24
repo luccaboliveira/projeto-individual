@@ -1,23 +1,15 @@
 var database = require("../database/config")
 
-// function adicionarTarefa(){
-//     var instrucaoSql = `
-//     INSERT INTO TAREFA (fk_pet, fk_usuario, categoria, descricao, data_final, status_atual) VALUES
-//     (100, 1, 'banho', 'gato ta sujo', '2024-11-27', 'Pendente');
-//     `
-//     console.log("Executando a instrução SQL: \n" + instrucaoSql);
-//     return database.executar(instrucaoSql);
-
-// }
-
-function listarPet(fkUsuario) {
+function adicionarTarefa(fkPet, fkUsuario, categoria, descricao, dataFinal){
     var instrucaoSql = `
-    SELECT id_pet, nome FROM pet 
-	    WHERE fk_usuario = ${fkUsuario};
+    INSERT INTO TAREFA (fk_pet, fk_usuario, categoria, descricao, data_final, status_atual) VALUES
+    (${fkPet}, ${fkUsuario}, '${categoria}', '${descricao}', '${dataFinal}', 'Pendente');
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
 
 function listarTarefa(fkUsuario) {
     var instrucaoSql = `
@@ -42,7 +34,7 @@ function atualizarStatus(idTarefa, statusAtual) {
 }
 
 module.exports = {
+    adicionarTarefa,
     listarTarefa,
-    listarPet,
     atualizarStatus,
 };

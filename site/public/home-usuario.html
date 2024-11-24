@@ -44,25 +44,34 @@
             <div class="lista-tarefas">
                 <h2>Lista de tarefas</h2>
                 <div class="container-campos">
+                    <div id="msg_tarefa" class="mensagem"></div>
+
                     <div class="campos-tarefa">
                         <label for="ipt_categoria">Categoria</label>
-                        <input type="text" id="ipt_categoria" class="ipt-campo" placeholder="Categoria">
+                        <input type="text" id="ipt_categoria" class="ipt-campo" placeholder="Categoria"
+                            onchange="validarCamposTarefa()">
+                        <div id="msg_categoria" class="mensagem mensagem_erro"></div>
                     </div>
 
                     <div class="campos-tarefa">
                         <label for="ipt_descricao">Descrição</label>
-                        <input type="text" id="ipt_descricao" class="ipt-campo" placeholder="Descrição">
+                        <input type="text" id="ipt_descricao" class="ipt-campo" placeholder="Descrição"
+                            onchange="validarCamposTarefa()">
+                        <div id="msg_descricao" class="mensagem mensagem_erro"></div>
                     </div>
 
                     <div class="campos-tarefa">
                         <label for="ipt_data">Data de conclusão</label>
-                        <input type="date" id="ipt_data" class="ipt-campo">
+                        <input type="date" id="ipt_data" class="ipt-campo" onchange="validarCamposTarefa()">
+                        <div id="msg_data" class="mensagem mensagem_erro"></div>
                     </div>
 
                     <div class="campos-tarefa">
                         <label for="select_animal">Pet</label>
-                        <select class="lista" id="select_animal">
+                        <select class="lista" id="select_animal" onchange="validarCamposTarefa()">
+                            <option value="#">Selecione um pet</option>
                         </select>
+                        <div id="msg_pet" class="mensagem mensagem_erro"></div>
                     </div>
 
                     <button class="botao btn-azul btn-tarefa" onclick="adicionarTarefa()">Cadastrar nova tarefa</button>
@@ -70,15 +79,15 @@
 
                 <div class="div-tabela">
                     <table id="tabela">
-                        <tr>
+                        <!-- <tr>
                             <th>Categoria</th>
                             <th>Descrição</th>
                             <th>Data</th>
                             <th>Animal</th>
                             <th>Status</th>
-                        </tr>
+                        </tr> -->
                     </table>
-                    <p id="p_mensagem">Insira uma tarefa nos campos acima!</p>
+                    <p id="p_mensagem"></p>
                 </div>
             </div>
 
@@ -112,8 +121,10 @@
 
     b_usuario.innerHTML = nomeUsuario
 
+    var camposValidos = false
+
     function listarPet() {
-        fetch("/tarefa/listarPet", {
+        fetch("/pet/listarPet", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -126,17 +137,17 @@
                 console.log("resposta: ", resposta);
                 if (resposta.ok) {
                     resposta.json().then(json => {
-                        var tamanho_lista = json.length;
-                        var estrutura = '<option value="#">Selecione um pet</option>';
+                        var tamanhoLista = json.length;
+                        var estrutura = '';
 
-                        for (var i = 0; i < tamanho_lista; i++) {
+                        for (var i = 0; i < tamanhoLista; i++) {
                             var id_pet = json[i].id_pet;
                             var nome = json[i].nome;
 
                             estrutura +=
                                 `<option value="${id_pet}">${nome}</option>`;
                         }
-                        select_animal.innerHTML = estrutura;
+                        select_animal.innerHTML += estrutura;
                     });
 
                 } else {
@@ -150,36 +161,100 @@
         return false;
     }
 
+    function validarCamposTarefa() {
+        var categoriaVar = ipt_categoria.value
+        var categoriaValida = categoriaVar.length > 0
+
+        var descricaoVar = ipt_descricao.value
+        var descricaoValida = descricaoVar.length > 0
+
+        var dataFinalVar = ipt_data.value
+        var dataFinalValida = dataFinalVar != ''
+
+        var petVar = select_animal.value
+        var petValido = petVar != '#'
+
+
+        if (categoriaValida) {
+            camposValidos = true
+            msg_categoria.innerHTML = ``
+        } else {
+            msg_categoria.innerHTML = `A categoria não pode estar vazia!`
+            camposValidos = false
+        }
+
+        if (descricaoValida) {
+            camposValidos = true
+            msg_descricao.innerHTML = ``
+        } else {
+            msg_descricao.innerHTML = `A descrição não pode estar vazia!`
+            camposValidos = false
+
+        }
+        if (dataFinalValida) {
+            camposValidos = true
+            msg_data.innerHTML = ``
+        } else {
+            msg_data.innerHTML = `A data não pode estar vazia!`
+            camposValidos = false
+        }
+        if (petValido) {
+            camposValidos = true
+            msg_pet.innerHTML = ``
+        } else {
+            msg_pet.innerHTML = `Selecione um pet!`
+            camposValidos = false
+
+        }
+    }
+
     function adicionarTarefa() {
+        var fkPetVar = select_animal.value
+        var fkUsuarioVar = sessionStorage.ID_USUARIO
+        var categoriaVar = ipt_categoria.value
+        var descricaoVar = ipt_descricao.value
+        var dataFinalVar = ipt_data.value
 
-        console.log(ipt_data.value)
+        if (camposValidos) {
 
-        p_mensagem.innerHTML = ``
+            fetch("/tarefa/adicionarTarefa", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    fkPetServer: fkPetVar,
+                    fkUsuarioServer: fkUsuarioVar,
+                    categoriaServer: categoriaVar,
+                    descricaoServer: descricaoVar,
+                    dataFinalServer: dataFinalVar
+                }),
+            })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
 
-        // seleciona o elemento com id tabela no html
-        var tabelaTarefas = document.getElementById('tabela')
+                    if (resposta.ok) {
+                        msg_tarefa.innerHTML = `Tarefa adicionada com sucesso!`
+                        listarTarefa()
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
 
-        // insere linha na tabela = parametro -1 garante que a linha vai sempre na ultima posiçao
-        var linha = tabelaTarefas.insertRow(-1)
+            return false;
 
-        // insere celula na posiçao 0 (tipo) da linha
-        var celulaCategoria = linha.insertCell(0)
-        var celulaDescricao = linha.insertCell(1)
-        var celulaData = linha.insertCell(2)
-        var celulaAnimal = linha.insertCell(3)
-        var celulaStatus = linha.insertCell(4)
+        } else {
+            msg_tarefa.innerHTML = "Erro ao adicionar a tarefa! Verifique as informações inseridas.";
 
-        // preenche as celulas de acordo com as entradas do usuário
-        celulaCategoria.innerText = ipt_categoria.value
-        celulaDescricao.innerText = ipt_descricao.value
-        celulaData.innerText = ipt_data.value
-        celulaAnimal.innerText = ipt_animal.value
-        celulaStatus.innerHTML = `
-        <select class="lista" id="select_status">
-            <option value="">Pendente</option>
-            <option value="">Concluído</option>
-            </select>
-        `
+            if (categoriaVar == "" || descricaoVar == "" || dataFinalVar == "" || nomePetVar == "") {
+                msg_tarefa.innerHTML = "Preencha todos os campos!";
+                return false;
+            }
+
+            throw "Houve um erro ao adicionar a tarefa";
+        }
+
     }
 
     function listarTarefa() {
@@ -200,46 +275,65 @@
                 console.log(resposta);
 
                 resposta.json().then(json => {
-                    // seleciona o elemento com id tabela no html
                     var tabelaTarefas = document.getElementById('tabela')
+                    var qtdLinhas = tabelaTarefas.rows.length
+                    tabelaTarefas.innerHTML = `
+                    <tr>
+                            <th>Categoria</th>
+                            <th>Descrição</th>
+                            <th>Data</th>
+                            <th>Animal</th>
+                            <th>Status</th>
+                        </tr>
+                    `
+                    var estruturaTabela = ''
 
-                    var tamanho_lista = json.length;
+                    var tamanhoLista = json.length;
 
-                    for (var i = 0; i < tamanho_lista; i++) {
+                    for (var i = 0; i < tamanhoLista; i++) {
                         var id_tarefa = json[i].id_tarefa
                         var categoria = json[i].categoria
                         var descricao = json[i].descricao
                         var data = json[i].data_final
-                        var data_final = data.slice(0,10)
+                        var data_final = data.slice(0, 10)
                         var nome = json[i].nome
                         var status_atual = json[i].status_atual
-                        
-                        // insere linha na tabela = parametro -1 garante que a linha vai sempre na ultima posiçao
-                        var linha = tabelaTarefas.insertRow(-1)
-    
-                        // insere celula na posiçao 0 (tipo) da linha
-                        var celulaCategoria = linha.insertCell(0)
-                        var celulaDescricao = linha.insertCell(1)
-                        var celulaData = linha.insertCell(2)
-                        var celulaAnimal = linha.insertCell(3)
-                        var celulaStatus = linha.insertCell(4)
-    
-                        // preenche as celulas de acordo com as entradas do usuário
-                        celulaCategoria.innerText = categoria
-                        celulaDescricao.innerText = descricao
-                        celulaData.innerText = data_final
-                        celulaAnimal.innerText = nome
-                        celulaStatus.innerHTML = `
-                        <select class="lista" onchange="atualizarStatus(${id_tarefa})" id="select_status${id_tarefa}">
-                            <option>Pendente</option>
-                            <option>Concluído</option>
-                        </select>
+
+                        estruturaTabela += `
+                        <tr>
+                            <td>${categoria}</td>    
+                            <td>${descricao}</td>    
+                            <td>${data_final}</td>    
+                            <td>${nome}</td>      
                         `
+                        if (status_atual == 'Pendente') {
+                            estruturaTabela += `
+                                <td>
+                                    <select class="lista" onchange="atualizarStatus(${id_tarefa})" id="select_status${id_tarefa}">
+                                        <option selected>Pendente</option>
+                                        <option>Concluído</option>
+                                    </select>
+                                </td>
+                                </tr>
+                                `
+                        } else {
+                            estruturaTabela += `
+                                <td>
+                                    <select class="lista" onchange="atualizarStatus(${id_tarefa})" id="select_status${id_tarefa}">
+                                        <option>Pendente</option>
+                                        <option selected>Concluído</option>
+                                    </select>
+                                </td>
+                                </tr>
+                                `
+                        }
                     }
 
+                    tabelaTarefas.innerHTML += estruturaTabela
                 });
 
             } else {
+                p_mensagem.innerHTML = `Nenhuma tarefa cadastrada. Insira uma nova tarefa nos campos acima!`
                 console.log("Houve um erro ao tentar listar as tarefas!");
 
                 resposta.text().then(texto => {
@@ -254,13 +348,6 @@
         return false;
 
     }
-
-    function limparSessao() {
-        sessionStorage.clear();
-        window.location = "../login.html";
-    }
-
-
 
     function atualizarStatus(idTarefa) {
 
@@ -291,5 +378,10 @@
             });
 
         return false;
+    }
+
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "../login.html";
     }
 </script>

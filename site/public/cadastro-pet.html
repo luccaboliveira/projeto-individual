@@ -49,7 +49,7 @@
                 <div id="nome_pet_msg" class="mensagem mensagem_erro"></div>
 
                 <label for="ipt_dt_nasc">Data de nascimento</label> <br>
-                <input class="ipt-campo" type="date" id="ipt_dt_nasc" oninput="validarCampos()"> <br>
+                <input class="ipt-campo" type="date" id="ipt_dt_nasc" onchange="validarCampos()"> <br>
                 <div id="nascimento_msg" class="mensagem mensagem_erro"></div>
 
                 <label for="sel_sexo">Sexo</label> <br>
@@ -63,11 +63,11 @@
                 <label for="sel_tipo">Tipo do animal</label> <br>
                 <select class="lista" id="sel_tipo" oninput="validarCampos()">
                     <option value="#">Selecione uma opção</option>
-                    <option value="Gato">Gato</option>
-                    <option value="Cachorro">Cachorro</option>
-                    <option value="Pássaro">Pássaro</option>
-                    <option value="Coelho">Coelho</option>
-                    <option value="Outros">Outros</option>
+                    <option>Gato</option>
+                    <option>Cachorro</option>
+                    <option>Pássaro</option>
+                    <option>Coelho</option>
+                    <option>Outros</option>
                 </select> <br>
                 <div id="tipo_msg" class="mensagem mensagem_erro"></div>
 
@@ -103,6 +103,7 @@
         var nomePetValido = nomePetVar.length >= 2
 
         var dtNascVar = ipt_dt_nasc.value
+        var dataFinalValida = dtNascVar != ''
 
         var sexoVar = sel_sexo.value
         var sexoValido = sexoVar != '#'
@@ -117,7 +118,7 @@
             nome_pet_msg.innerHTML = `Nome inválido! O nome deve ter mais de 2 caracteres`
             camposValidos = false
         }
-
+        
         if (sexoValido) {
             sexo_msg.innerHTML = ``
             camposValidos = true
@@ -125,7 +126,7 @@
             sexo_msg.innerHTML = `Campo inválido! Selecione uma opção.`
             camposValidos = false
         }
-
+        
         if (tipoValido) {
             tipo_msg.innerHTML = ``
             camposValidos = true
@@ -134,8 +135,16 @@
             camposValidos = false
         }
 
+        if (dataFinalValida) {
+            camposValidos = true
+            nascimento_msg.innerHTML = ``
+        } else {
+            nascimento_msg.innerHTML = `A data não pode estar vazia/incompleta!`
+            camposValidos = false
+        }
+    
     }
-
+    
     function cadastrarPet() {
         var idUsuarioVar = sessionStorage.ID_USUARIO
         var nomePetVar = ipt_pet_nome.value
@@ -143,8 +152,6 @@
         var sexoVar = sel_sexo.value
         var tipoVar = sel_tipo.value
 
-
-        console.log(nomePetVar)
         if (camposValidos) {
             
             fetch("/pet/cadastrarPet", {

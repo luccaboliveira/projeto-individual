@@ -7,4 +7,8 @@ router.post("/cadastrarPet", function (req, res) {
     petController.cadastrarPet(req, res);
 });
 
+router.post("/listarPet", function (req, res) {
+    petController.listarPet(req, res);
+})
+
 module.exports = router;

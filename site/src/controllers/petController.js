@@ -35,6 +35,26 @@ function cadastrarPet(req, res) {
     }
 }
 
+function listarPet(req, res) {
+    var fkUsuario = req.body.fkUsuarioServer;
+
+    petModel.listarPet(fkUsuario)
+
+        .then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).json([]);
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os pets: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+
+}
+
 module.exports = {
-    cadastrarPet
+    cadastrarPet,
+    listarPet
 }
