@@ -299,6 +299,8 @@ body {
 
 
 .card-pets .card {
+    /* display: flex;
+    justify-content: space-between; */
     height: 40%;
     padding: 15px;
     text-align: center;

@@ -39,7 +39,7 @@
             <h1>Bem vindo(a), <span id="b_usuario">usuário</span>!</h1>
             <div class="container-botao">
                 <a href="cadastro-pet.html"><button class="botao btn-azul-linha">Cadastrar novo pet</button></a>
-                <a href="#"><button class="botao btn-azul-linha">Acessar dashboard</button></a>
+                <a href="dashboard.html"><button class="botao btn-azul-linha">Acessar dashboard</button></a>
             </div>
             <div class="lista-tarefas">
                 <h2>Lista de tarefas</h2>
@@ -92,14 +92,8 @@
             </div>
 
             <h2>Seus pets</h2>
-            <div class="card-pets">
-                <div class="card">
-                    <div class="img">
-                        <img src="assets/exemplo-gato.png" alt="">
-                    </div>
-                    <h1>Nome do pet</h1>
-                </div>
-
+            <div class="card-pets" id="div_card_pets">
+                <p class="mensagem">Nenhum pet cadastrado!</p>
             </div>
         </div>
     </div>
@@ -138,16 +132,28 @@
                 if (resposta.ok) {
                     resposta.json().then(json => {
                         var tamanhoLista = json.length;
-                        var estrutura = '';
+                        var estruturaSelect = '';
+                        var estruturaCard = ''
 
                         for (var i = 0; i < tamanhoLista; i++) {
                             var id_pet = json[i].id_pet;
                             var nome = json[i].nome;
+                            var tipo = json[i].tipo;
 
-                            estrutura +=
+                            estruturaSelect +=
                                 `<option value="${id_pet}">${nome}</option>`;
+
+                            estruturaCard += `
+                            <div class="card" id="card_pet${id_pet}">
+                                <div class="img">
+                                    <img src="assets/icone-${tipo}.png" alt="">
+                                </div>
+                                    <h1>${nome}</h1>
+                            </div>
+                            `
                         }
-                        select_animal.innerHTML += estrutura;
+                        select_animal.innerHTML += estruturaSelect;
+                        div_card_pets.innerHTML = estruturaCard
                     });
 
                 } else {
@@ -274,7 +280,7 @@
             if (resposta.ok) {
                 console.log(resposta);
                 p_mensagem.innerHTML = ``
-                
+
                 resposta.json().then(json => {
                     var tabelaTarefas = document.getElementById('tabela')
                     var qtdLinhas = tabelaTarefas.rows.length

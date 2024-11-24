@@ -12,7 +12,7 @@ function cadastrarPet(idUsuario, nomePet, dtNasc, sexo, tipo){
 
 function listarPet(fkUsuario) {
     var instrucaoSql = `
-    SELECT id_pet, nome FROM pet 
+    SELECT id_pet, nome, tipo FROM pet 
 	    WHERE fk_usuario = ${fkUsuario};
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
