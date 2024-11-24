@@ -61,11 +61,11 @@
                 <div id="sexo_msg" class="mensagem mensagem_erro"></div>
 
                 <label for="sel_tipo">Tipo do animal</label> <br>
-                <select class="lista" id="sel_tipo" oninput="validarCampos()">
+                <select class="lista" id="sel_tipo" oninput="validarCampos()" onchange="mudarImagem()">
                     <option value="#">Selecione uma opção</option>
                     <option>Gato</option>
                     <option>Cachorro</option>
-                    <option>Pássaro</option>
+                    <option value="Passaro">Pássaro</option>
                     <option>Coelho</option>
                     <option>Outros</option>
                 </select> <br>
@@ -76,8 +76,8 @@
 
             </div>
 
-            <div class="container-imagem">
-                <img src="assets/img-gato-coelho.png" id="" alt="Imagem com animais">
+            <div class="container-imagem" id="img_cadastro">
+                <img src="assets/img-gato-coelho.png" alt="Imagem com animais">
             </div>
 
         </div>
@@ -97,6 +97,14 @@
 </html>
 <script>
     var camposValidos = false
+
+    function mudarImagem() {
+        var tipo = sel_tipo.value
+
+        if(tipo != '#'){
+            img_cadastro.innerHTML = `<img src="assets/img-${tipo}.png">`
+        }
+    }
 
     function validarCampos() {
         var nomePetVar = ipt_pet_nome.value

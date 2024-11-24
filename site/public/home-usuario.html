@@ -273,7 +273,8 @@
 
             if (resposta.ok) {
                 console.log(resposta);
-
+                p_mensagem.innerHTML = ``
+                
                 resposta.json().then(json => {
                     var tabelaTarefas = document.getElementById('tabela')
                     var qtdLinhas = tabelaTarefas.rows.length

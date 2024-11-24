@@ -18,9 +18,10 @@ create table pet (
     sexo char(1),
     constraint chkSexo check (sexo in('M', 'F')),
     tipo varchar(10),
-    constraint chkTipo check (tipo in('Gato', 'Cachorro', 'Pássaro', 'Coelho', 'Outros')),
+    constraint chkTipo check (tipo in('Gato', 'Cachorro', 'Passaro', 'Coelho', 'Outros')),
     foreign key (fk_usuario) references usuario(id_usuario)
 ) auto_increment = 100;
+
 
 create table tarefa(
 	id_tarefa int auto_increment,
@@ -30,8 +31,8 @@ create table tarefa(
     categoria varchar(45),
     descricao varchar(255),
     data_final date,
-    status_atual varchar(8),
+    status_atual varchar(9),
     constraint chkStatus check(status_atual in('Pendente', 'Concluído')),
     foreign key (fk_pet) references pet(id_pet),
     foreign key (fk_usuario) references usuario(id_usuario)
-) auto_increment = 1000;
+)
