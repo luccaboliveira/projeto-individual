@@ -28,7 +28,10 @@
                     <a href="cadastro-pet.html">Cadastrar pet</a>
                 </li>
                 <li>
-                    <button class="btn-sair" onclick="limparSessao()">Sair</button>
+                <li>
+                    <a href="dashboard.html">Dashboards</a>
+                </li>
+                <button class="btn-sair" onclick="limparSessao()">Sair</button>
                 </li>
             </ul>
         </div>
@@ -43,9 +46,9 @@
             </div>
             <div class="lista-tarefas">
                 <h2>Lista de tarefas</h2>
-                <div class="container-campos">
-                    <div id="msg_tarefa" class="mensagem"></div>
+                <div id="msg_tarefa" class="mensagem"></div>
 
+                <div class="container-campos">
                     <div class="campos-tarefa">
                         <label for="ipt_categoria">Categoria</label>
                         <input type="text" id="ipt_categoria" class="ipt-campo" placeholder="Categoria"
@@ -78,15 +81,7 @@
                 </div>
 
                 <div class="div-tabela">
-                    <table id="tabela">
-                        <!-- <tr>
-                            <th>Categoria</th>
-                            <th>Descrição</th>
-                            <th>Data</th>
-                            <th>Animal</th>
-                            <th>Status</th>
-                        </tr> -->
-                    </table>
+                    <table id="tabela"></table>
                     <p id="p_mensagem"></p>
                 </div>
             </div>
@@ -109,7 +104,6 @@
 
 </html>
 <script>
-
     var nomeUsuario = sessionStorage.NOME_USUARIO
     var idUsuario = sessionStorage.ID_USUARIO
 
@@ -241,7 +235,16 @@
 
                     if (resposta.ok) {
                         msg_tarefa.innerHTML = `Tarefa adicionada com sucesso!`
+
+                        setTimeout(() => {
+                            msg_tarefa.innerHTML = ``
+                        }, 3000);
+
                         listarTarefa()
+                        select_animal.value = '#'
+                        ipt_categoria.value = ''
+                        ipt_descricao.value = ''
+                        ipt_data.value = ''
                     }
                 })
                 .catch(function (resposta) {
@@ -251,12 +254,11 @@
             return false;
 
         } else {
-            msg_tarefa.innerHTML = "Erro ao adicionar a tarefa! Verifique as informações inseridas.";
+            msg_tarefa.innerHTML = "Erro ao adicionar a tarefa! Verifique as informações inseridas."
 
-            if (categoriaVar == "" || descricaoVar == "" || dataFinalVar == "" || nomePetVar == "") {
-                msg_tarefa.innerHTML = "Preencha todos os campos!";
-                return false;
-            }
+            setTimeout(() => {
+                msg_tarefa.innerHTML = ``
+            }, 3000);
 
             throw "Houve um erro ao adicionar a tarefa";
         }

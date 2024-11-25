@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboards - PetPlanner</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="assets/logo-gato-branco.png" type="image/x-icon">
+</head>
+
+<body onload="listarPet()">
+    <div class="header">
+        <div class="container">
+            <a href="index.html">
+                <div class="logo">
+                    <img src="assets/logo-branco.png" alt="">
+                </div>
+            </a>
+            <ul class="navbar">
+                <li>
+                    <a href="home-usuario.html">Página inicial</a>
+                </li>
+                <li>
+                    <a href="cadastro-pet.html">Cadastrar pet</a>
+                </li>
+                <li>
+                    <a href="dashboard.html" class="selecionado">Dashboards</a>
+                </li>
+                <li>
+                    <button class="btn-sair" onclick="limparSessao()">Sair</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="home">
+        <div class="container">
+            <h2>Seus pets</h2>
+            <div class="card-pets" id="div_card_pets">
+                <p class="mensagem">Nenhum pet cadastrado!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/logo-branco.png" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var idUsuario = sessionStorage.ID_USUARIO
+
+    function listarPet() {
+        fetch("/pet/listarPet", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                fkUsuarioServer: idUsuario
+            })
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        var tamanhoLista = json.length;
+                        var estruturaCard = ''
+
+                        for (var i = 0; i < tamanhoLista; i++) {
+                            var id_pet = json[i].id_pet;
+                            var nome = json[i].nome;
+                            var tipo = json[i].tipo;
+
+                            estruturaCard += `
+                            <div class="card" id="card_pet${id_pet}">
+                                <div class="img">
+                                    <img src="assets/icone-${tipo}.png" alt="">
+                                </div>
+                                    <h1>${nome}</h1>
+                            </div>
+                            `
+                        }
+                        div_card_pets.innerHTML = estruturaCard
+                    });
+
+                } else {
+                    console.log('Pets não listados!');
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
+</script>

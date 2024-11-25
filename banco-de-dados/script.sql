@@ -35,4 +35,4 @@ create table tarefa(
     constraint chkStatus check(status_atual in('Pendente', 'Concluído')),
     foreign key (fk_pet) references pet(id_pet),
     foreign key (fk_usuario) references usuario(id_usuario)
-)
+);
