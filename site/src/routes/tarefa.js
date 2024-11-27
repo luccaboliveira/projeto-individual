@@ -15,4 +15,8 @@ router.put("/atualizarStatus", function (req, res) {
     tarefaController.atualizarStatus(req, res);
 })
 
+router.get("/buscarQtdTarefa/:fkUsuario/:fkPet", function (req, res) {
+    tarefaController.buscarQtdTarefa(req, res);
+})
+
 module.exports = router;

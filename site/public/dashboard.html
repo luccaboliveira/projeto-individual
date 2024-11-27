@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="assets/logo-gato-branco.png" type="image/x-icon">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body onload="listarPet()">
@@ -44,6 +46,19 @@
                 <p class="mensagem">Nenhum pet cadastrado!</p>
             </div>
         </div>
+
+        <div class="container">
+            <h2>Gráficos</h2>
+            <div class="div-graficos">
+                <div class="grafico">
+                    <canvas id="myChartTarefasBarra"></canvas>
+                </div>
+                <div class="grafico">
+                    <canvas id="myChartTarefasPizza"></canvas>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div class="footer">
@@ -58,6 +73,7 @@
 </html>
 <script>
     var idUsuario = sessionStorage.ID_USUARIO
+
 
     function listarPet() {
         fetch("/pet/listarPet", {
@@ -87,9 +103,12 @@
                                     <img src="assets/icone-${tipo}.png" alt="">
                                 </div>
                                     <h1>${nome}</h1>
+                                    <div id="kpi_pet${id_pet}">Nenhuma tarefa cadastrada!</div>
                             </div>
                             `
+                            buscarQtdTarefa(id_pet, idUsuario)
                         }
+
                         div_card_pets.innerHTML = estruturaCard
                     });
 
@@ -103,4 +122,96 @@
 
         return false;
     }
+
+
+    function buscarQtdTarefa(fkUsuario, fkPet) {
+        console.log(fkUsuario, fkPet)
+
+        fetch(`/tarefa/buscarQtdTarefa/${fkUsuario}/${fkPet}`)
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(json => {
+                        console.log(json);
+                        var lista_nome = []
+                        var lista_qtdTarefas = []
+
+                        var lista_label = ['Pendente', 'Concluído']
+                        var lista_status = []
+                        // var lista_concluido = []
+                        for(var i = 0; i < json.length; i++){
+                            var id_pet = json[i].fk_pet;
+                            var pet = document.getElementById(`kpi_pet${id_pet}`)
+                            pet.innerHTML = `Quantidade de tarefas cadastradas: ${json[i].qtdTarefa}`;
+
+                            lista_nome.push(json[i].nome);
+                            lista_qtdTarefas.push(json[i].qtdTarefa)
+
+                            // lista_concluido.push(json[i].qtdConcluido)
+                        }
+                        
+                        lista_status.push(json[0].qtdPendente)
+                        lista_status.push(json[0].qtdConcluido)
+                        
+                        plotarGraficoBarra(lista_nome, lista_qtdTarefas);
+                        plotarGraficoPizza(lista_label, lista_status);
+
+                        // console.log(lista_concluido, lista_pendente)
+                    });
+
+                } else {
+                    console.error("Nenhum dado encontrado ou erro na API");
+                }
+            })
+            .catch(function (error) {
+                console.error(
+                    `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+                );
+            });
+    }
+
+    function plotarGraficoBarra(label, data) {
+        const ctx = document.getElementById('myChartTarefasBarra');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: label,
+                datasets: [{
+                    label: 'Pets e Tarefas',
+                    data: data,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+
+    }
+   
+   function plotarGraficoPizza(label, data) {
+       const ctx2 = document.getElementById('myChartTarefasPizza');
+       new Chart(ctx2, {
+           type: 'pie',
+           data: {
+               labels: label,
+               datasets: [{
+                   label: 'Relação entre tarefas concluídas e pendentes',
+                   data: data,
+                   backgroundColor: [
+                       'rgb(255, 99, 132)',
+                       'rgb(54, 162, 235)'
+                   ],
+                   hoverOffset: 4
+               }]
+           }
+       });
+   }
+
+
+
 </script>

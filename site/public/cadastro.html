@@ -95,9 +95,9 @@
         var emailValido = emailVar.includes('@') && emailVar.length >= 5
 
         var senhaVar = ipt_senha.value
-        var senhaMinuscula = senhaVar.toLowerCase() 
-        var senhaMaiuscula =  senhaVar.toUpperCase()
-        var senhaValida = (senhaVar.length >= 8)  && senhaVar != senhaMinuscula && senhaVar != senhaMaiuscula
+        var senhaMinuscula = senhaVar.toLowerCase()
+        var senhaMaiuscula = senhaVar.toUpperCase()
+        var senhaValida = (senhaVar.length >= 8) && senhaVar != senhaMinuscula && senhaVar != senhaMaiuscula
 
         var confirmacaoSenhaVar = ipt_confirma_senha.value
         var confirmacaoValida = confirmacaoSenhaVar == senhaVar
@@ -155,6 +155,11 @@
                         mensagem_cadastro.innerHTML =
                             "Cadastro realizado com sucesso! Redirecionando para tela de login...";
 
+                        ipt_nome.value = ''
+                        ipt_email.value = ''
+                        ipt_senha.value = ''
+                        ipt_confirma_senha.value = ''
+
                         setTimeout(() => {
                             window.location = "login.html";
                         }, "2000");
@@ -163,19 +168,19 @@
                 .catch(function (resposta) {
                     console.log(`#ERRO: ${resposta}`);
                 });
-                
-                return false;
-                
+
+            return false;
+
         } else {
             mensagem_cadastro.innerHTML = "Houve um erro ao realizar o cadastro. Verifique as informações inseridas.";
-            
+
             if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
                 mensagem_cadastro.innerHTML = "Preencha todos os campos!";
                 return false;
             }
-            
+
             throw "Houve um erro ao tentar realizar o cadastro!";
         }
     }
-    
+
 </script>

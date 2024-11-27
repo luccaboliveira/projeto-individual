@@ -98,8 +98,30 @@ function atualizarStatus(req, res) {
     }
 }
 
+function buscarQtdTarefa(req, res) {
+    var fkUsuario = req.params.fkUsuario;
+    var fkPet = req.params.fkPet;
+
+    console.log(`Buscando tarefas`);
+
+    tarefaModel.buscarQtdTarefa(fkUsuario, fkPet)                                     
+      .then(function (resultado) {                              
+        if (resultado.length > 0) {                             
+          console.log(resultado);                               
+          res.status(200).json(resultado);                     
+        } else {                                                
+          res.status(204).send("Nenhum resultado encontrado!");
+        }
+      })
+      .catch(function (erro) {                                             // CAPTURA qualquer erro ocorrido durante a execução da query para a busca dos votos
+        console.log(erro);                                                 // exibe o JSON contendo as informações do erro ocorrido
+        console.log("Houve um erro ao buscar as tarefas", erro.sqlMessage); // exibe a mensagem do erro ocorrido
+        res.status(500).json(erro.sqlMessage);                             // retorna o status 500 (Erro) com a mensagem do erro ocorrido
+      });
+}
 module.exports = {
     adicionarTarefa,
     listarTarefa,
-    atualizarStatus
+    atualizarStatus,
+    buscarQtdTarefa
 }

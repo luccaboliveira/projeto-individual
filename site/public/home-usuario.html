@@ -86,10 +86,10 @@
                 </div>
             </div>
 
-            <h2>Seus pets</h2>
+            <!-- <h2>Seus pets</h2>
             <div class="card-pets" id="div_card_pets">
                 <p class="mensagem">Nenhum pet cadastrado!</p>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -122,43 +122,32 @@
             })
         })
             .then(function (resposta) {
-                console.log("resposta: ", resposta);
+                console.log("resposta: ", resposta)
                 if (resposta.ok) {
                     resposta.json().then(json => {
-                        var tamanhoLista = json.length;
-                        var estruturaSelect = '';
-                        var estruturaCard = ''
+                        var tamanhoLista = json.length
+                        var estruturaSelect = ''
 
                         for (var i = 0; i < tamanhoLista; i++) {
-                            var id_pet = json[i].id_pet;
-                            var nome = json[i].nome;
-                            var tipo = json[i].tipo;
+                            var id_pet = json[i].id_pet
+                            var nome = json[i].nome
+                            var tipo = json[i].tipo
 
                             estruturaSelect +=
-                                `<option value="${id_pet}">${nome}</option>`;
-
-                            estruturaCard += `
-                            <div class="card" id="card_pet${id_pet}">
-                                <div class="img">
-                                    <img src="assets/icone-${tipo}.png" alt="">
-                                </div>
-                                    <h1>${nome}</h1>
-                            </div>
-                            `
+                                `<option value="${id_pet}">${nome}</option>`
                         }
-                        select_animal.innerHTML += estruturaSelect;
-                        div_card_pets.innerHTML = estruturaCard
-                    });
+                        select_animal.innerHTML += estruturaSelect
+                    })
 
                 } else {
-                    console.log('Pets não listados!');
+                    console.log('Pets não listados!')
                 }
             })
             .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-            });
+                console.log(`#ERRO: ${resposta}`)
+            })
 
-        return false;
+        return false
     }
 
     function validarCamposTarefa() {
@@ -231,14 +220,14 @@
                 }),
             })
                 .then(function (resposta) {
-                    console.log("resposta: ", resposta);
+                    console.log("resposta: ", resposta)
 
                     if (resposta.ok) {
                         msg_tarefa.innerHTML = `Tarefa adicionada com sucesso!`
 
                         setTimeout(() => {
                             msg_tarefa.innerHTML = ``
-                        }, 3000);
+                        }, 3000)
 
                         listarTarefa()
                         select_animal.value = '#'
@@ -248,19 +237,19 @@
                     }
                 })
                 .catch(function (resposta) {
-                    console.log(`#ERRO: ${resposta}`);
-                });
+                    console.log(`#ERRO: ${resposta}`)
+                })
 
-            return false;
+            return false
 
         } else {
             msg_tarefa.innerHTML = "Erro ao adicionar a tarefa! Verifique as informações inseridas."
 
             setTimeout(() => {
                 msg_tarefa.innerHTML = ``
-            }, 3000);
+            }, 3000)
 
-            throw "Houve um erro ao adicionar a tarefa";
+            throw "Houve um erro ao adicionar a tarefa"
         }
 
     }
@@ -280,7 +269,7 @@
             console.log("ESTOU NO THEN DO listarTarefa()!")
 
             if (resposta.ok) {
-                console.log(resposta);
+                console.log(resposta)
                 p_mensagem.innerHTML = ``
 
                 resposta.json().then(json => {
@@ -297,7 +286,7 @@
                     `
                     var estruturaTabela = ''
 
-                    var tamanhoLista = json.length;
+                    var tamanhoLista = json.length
 
                     for (var i = 0; i < tamanhoLista; i++) {
                         var id_tarefa = json[i].id_tarefa
@@ -339,22 +328,22 @@
                     }
 
                     tabelaTarefas.innerHTML += estruturaTabela
-                });
+                })
 
             } else {
                 p_mensagem.innerHTML = `Nenhuma tarefa cadastrada. Insira uma nova tarefa nos campos acima!`
-                console.log("Houve um erro ao tentar listar as tarefas!");
+                console.log("Houve um erro ao tentar listar as tarefas!")
 
                 resposta.text().then(texto => {
-                    console.error(texto);
-                });
+                    console.error(texto)
+                })
             }
 
         }).catch(function (erro) {
-            console.log(erro);
+            console.log(erro)
         })
 
-        return false;
+        return false
 
     }
 
@@ -375,22 +364,22 @@
 
         })
             .then(function (resposta) {
-                console.log("resposta: ", resposta);
+                console.log("resposta: ", resposta)
                 if (resposta.ok) {
                     console.log(resposta)
                 } else {
-                    console.log('Erro ao atualizar!');
+                    console.log('Erro ao atualizar!')
                 }
             })
             .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-            });
+                console.log(`#ERRO: ${resposta}`)
+            })
 
-        return false;
+        return false
     }
 
     function limparSessao() {
-        sessionStorage.clear();
-        window.location = "../login.html";
+        sessionStorage.clear()
+        window.location = "../login.html"
     }
 </script>

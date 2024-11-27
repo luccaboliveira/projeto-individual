@@ -73,9 +73,10 @@
                     <option>Outros</option>
                 </select> <br>
                 <div id="tipo_msg" class="mensagem mensagem_erro"></div>
-
-                <button class="botao btn-cinza" onclick="history.back()">Voltar</button>
-                <button class="botao btn-azul" onclick="cadastrarPet()">Cadastrar</button>
+                
+                <div class="container-botoes">
+                    <button class="botao btn-azul" onclick="cadastrarPet()">Cadastrar</button>
+                </div>
 
             </div>
 
@@ -104,7 +105,7 @@
     function mudarImagem() {
         var tipo = sel_tipo.value
 
-        if(tipo != '#'){
+        if (tipo != '#') {
             img_cadastro.innerHTML = `<img src="assets/img-${tipo}.png">`
         }
     }
@@ -129,7 +130,7 @@
             nome_pet_msg.innerHTML = `Nome inválido! O nome deve ter mais de 2 caracteres`
             camposValidos = false
         }
-        
+
         if (sexoValido) {
             sexo_msg.innerHTML = ``
             camposValidos = true
@@ -137,7 +138,7 @@
             sexo_msg.innerHTML = `Campo inválido! Selecione uma opção.`
             camposValidos = false
         }
-        
+
         if (tipoValido) {
             tipo_msg.innerHTML = ``
             camposValidos = true
@@ -153,9 +154,9 @@
             nascimento_msg.innerHTML = `A data não pode estar vazia/incompleta!`
             camposValidos = false
         }
-    
+
     }
-    
+
     function cadastrarPet() {
         var idUsuarioVar = sessionStorage.ID_USUARIO
         var nomePetVar = ipt_pet_nome.value
@@ -164,7 +165,7 @@
         var tipoVar = sel_tipo.value
 
         if (camposValidos) {
-            
+
             fetch("/pet/cadastrarPet", {
                 method: "POST",
                 headers: {
@@ -182,7 +183,14 @@
                     console.log("resposta: ", resposta);
 
                     if (resposta.ok) {
-                        mensagem_cadastro_pet.innerHTML = `Cadastro do pet ${nomePetVar} realizado com sucesso!`
+                        mensagem_cadastro_pet.innerHTML = `
+                        Cadastro do pet ${nomePetVar} realizado com sucesso! <br>
+                        <a href="/home-usuario.html" class="link">Voltar para a página inicial</a>`
+
+                        ipt_pet_nome.value = ''
+                        ipt_dt_nasc.value = ''
+                        sel_sexo.value = '#'
+                        sel_tipo.value = '#'
                     }
                 })
                 .catch(function (resposta) {
