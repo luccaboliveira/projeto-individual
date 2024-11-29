@@ -301,11 +301,16 @@ body {
 
 .card-pets .card {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     border: 1px solid #9fa0aa;
     align-items: center;
     box-shadow: none;
     border-radius: 5px;
+    text-align: center;
+}
+
+.texto-card-pet {
+    width: 100%;
 }
 
 .card .img{
@@ -313,6 +318,7 @@ body {
     justify-content: center;
     border-radius: 10px;
 }
+
 #icon {
     width: 30%;
 }
@@ -335,16 +341,13 @@ body {
     text-align: left;
 }
 
-#tarefa,
-th,
-td {
+#tarefa, th, td {
     padding: 7px;
     border: 1px solid #0F1127;
     background-color: #ffffff;
 }
 
-#tarefa,
-th {
+#tarefa, th {
     font-weight: 600;
 }
 
@@ -403,19 +406,16 @@ th {
 
 .card-kpis {
     display: flex;
-    justify-content: center;
-    gap: 30px;
+    flex-direction: column;
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 16px;
+    justify-content: space-between;
 }
 
 .card-kpis .card {
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
     width: 180px;
     border-radius: 5px;
+    box-shadow: none;
+    border: 1px solid #9fa0aa;
 }
 
 .card-kpis h3{
@@ -433,22 +433,18 @@ canvas {
     height: 80px;
 }
 .container-estatisticas h2 {
-    margin-bottom: 0px;
+    margin-bottom: 30px;
     text-align: center;
 }
 
 .container-estatisticas {
     display: flex;
+    height: 100%;
     justify-content: space-evenly;
-    align-items: center;
+    margin: 30px 0px 30px 0px;
 }
 
 .container h2 {
     margin-top: 30px;
     margin-bottom: 0;
-}
-
-.card-kpis {
-    display: flex;
-    flex-direction: column;
 }
