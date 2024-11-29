@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     color: #ffffff;
-    background-color: #1129FF;
+    background-color: #1129ff;
 }
 
 
@@ -136,6 +136,7 @@ body {
 
 .card h1 {
     font-size: 20px;
+    text-align: center;
 }
 
 .cadastro .container {
@@ -299,16 +300,21 @@ body {
 
 
 .card-pets .card {
-    /* display: flex;
-    justify-content: space-between; */
-    height: 40%;
-    padding: 15px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #9fa0aa;
+    align-items: center;
+    box-shadow: none;
+    border-radius: 15px;
 }
 
-.card img {
-    width: 30%;
+.card .img{
+    display: flex;
+    justify-content: center;
     border-radius: 10px;
+}
+#icon {
+    width: 30%;
 }
 
 .div-tabela {
@@ -384,10 +390,43 @@ th {
 
 .div-graficos {
     display: flex;
+    flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
 }
 
-.grafico {
-    height: 100%;
+.card-kpis {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.card-kpis .card {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    width: 180px;
+}
+
+.card-kpis h3{
+    font-size: 17px;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+
+
+canvas {
+    height: 150px;
+    width: 500px;
+}
+
+#myChartTarefasPizza{
+    height: 80px;
+}
+.container h2 {
+    margin-bottom: 0px;
 }

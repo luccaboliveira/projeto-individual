@@ -33,13 +33,16 @@ function atualizarStatus(idTarefa, statusAtual) {
 
 function buscarQtdTarefa(fkPet, fkUsuario) {
     var instrucaoSql = `
-    SELECT count(fk_pet) as qtdTarefa, fk_pet, nome, (SELECT count(fk_pet) from tarefa where status_atual = 'Pendente') as qtdPendente, 
-    (SELECT count(fk_pet) from tarefa where status_atual = 'Concluído') as qtdConcluido  
-    FROM tarefa
-    JOIN Pet
-    ON fk_pet = id_pet
-    WHERE tarefa.fk_usuario = 1
-    GROUP BY FK_PET, NOME;
+    SELECT 
+    (SELECT max(qtdTarefa) FROM (SELECT COUNT(fk_pet) AS qtdTarefa FROM tarefa WHERE tarefa.fk_usuario = ${fkUsuario} GROUP BY FK_PET) AS qtdTotal) as maiorQtd,
+    (SELECT min(qtdTarefa) FROM (SELECT COUNT(fk_pet) AS qtdTarefa FROM tarefa WHERE tarefa.fk_usuario = ${fkUsuario} GROUP BY FK_PET) AS qtdTotal) as menorQtd,
+    (SELECT count(fk_pet) from tarefa where status_atual = 'Pendente' AND fk_usuario = ${fkUsuario}) as qtdPendente, 
+    (SELECT count(fk_pet) from tarefa where status_atual = 'Concluído' AND fk_usuario = ${fkUsuario}) as qtdConcluido,
+    (SELECT count(fk_pet) WHERE tarefa.fk_usuario = ${fkUsuario}) AS qtdTarefa,
+    fk_pet, nome, tipo
+    FROM tarefa JOIN Pet ON fk_pet = id_pet
+    WHERE tarefa.fk_usuario = ${fkUsuario}
+    GROUP BY tarefa.FK_PET, pet.nome, pet.tipo;
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
