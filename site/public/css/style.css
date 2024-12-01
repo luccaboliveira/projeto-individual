@@ -130,7 +130,7 @@ body {
     padding: 10px 30px 10px 30px;
     background-color: #ffffff;
     border-radius: 20px;
-    width: 30%;
+    /* width: 30%; */
     box-shadow: 5px 5px 5px hsla(235, 44%, 11%, 0.24);
 }
 
@@ -301,7 +301,7 @@ body {
 
 .card-pets .card {
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     border: 1px solid #9fa0aa;
     align-items: center;
     box-shadow: none;
@@ -396,6 +396,7 @@ img#icon {
     justify-content: center;
     gap: 40px;
     padding: 15px 0px 15px 10px;
+    height: 400px;
 }
 
 .card-kpis {
