@@ -2,7 +2,7 @@ var database = require("../database/config")
 
 function adicionarTarefa(fkPet, fkUsuario, categoria, descricao, dataFinal) {
     var instrucaoSql = `
-    INSERT INTO TAREFA (fk_pet, fk_usuario, categoria, descricao, data_final, status_atual) VALUES
+    INSERT INTO tarefa (fk_pet, fk_usuario, categoria, descricao, data_final, status_atual) VALUES
     (${fkPet}, ${fkUsuario}, '${categoria}', '${descricao}', '${dataFinal}', 'Pendente');
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -41,7 +41,7 @@ function buscarQtdTarefa(fkPet, fkUsuario) {
     (SELECT count(fk_pet) WHERE tarefa.fk_usuario = ${fkUsuario}) AS qtdTarefa,
     (SELECT count(id_tarefa) from tarefa WHERE tarefa.fk_usuario = ${fkUsuario}) AS qtdTotal,
     fk_pet, nome
-    FROM tarefa JOIN Pet ON fk_pet = id_pet
+    FROM tarefa JOIN pet ON fk_pet = id_pet
     WHERE tarefa.fk_usuario = ${fkUsuario}
     GROUP BY tarefa.fk_pet, nome;
     `

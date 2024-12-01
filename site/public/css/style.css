@@ -291,7 +291,7 @@ body {
     display: flex;
     gap: 20px;
     justify-content: center;
-    margin: 30px 0px 30px 0px;
+    margin: 30px 0px 0px 0px;
 }
 
 .home .botao {
@@ -396,7 +396,7 @@ img#icon {
     justify-content: center;
     gap: 40px;
     padding: 15px 0px 15px 10px;
-    height: 400px;
+    height: 465px;
 }
 
 .card-kpis {
@@ -407,10 +407,15 @@ img#icon {
 }
 
 .card-kpis .card {
-    width: 180px;
+    width: 240px;
     border-radius: 5px;
     box-shadow: none;
     border: 1px solid #9fa0aa;
+}
+.card#cardMetrica {
+    text-align: center;
+    width: 240px !important;
+    font-size: 15px;
 }
 
 .card-kpis h3{
@@ -420,7 +425,7 @@ img#icon {
 }
 
 canvas {
-    height: 150px;
+    height: 100px;
     width: 300px;
 }
 

@@ -50,8 +50,8 @@
 
                 <div class="container-campos">
                     <div class="campos-tarefa">
-                        <label for="ipt_categoria">Categoria</label>
-                        <input type="text" id="ipt_categoria" class="ipt-campo" placeholder="Categoria"
+                        <label for="ipt_categoria">Título da tarefa</label>
+                        <input type="text" id="ipt_categoria" class="ipt-campo" placeholder="Título"
                             onchange="validarCamposTarefa()">
                         <div id="msg_categoria" class="mensagem mensagem_erro"></div>
                     </div>
@@ -168,7 +168,7 @@
             camposValidos = true
             msg_categoria.innerHTML = ``
         } else {
-            msg_categoria.innerHTML = `A categoria não pode estar vazia!`
+            msg_categoria.innerHTML = `O título não pode estar vazio!`
             camposValidos = false
         }
 
@@ -277,9 +277,9 @@
                     var qtdLinhas = tabelaTarefas.rows.length
                     tabelaTarefas.innerHTML = `
                     <tr>
-                            <th>Categoria</th>
+                            <th>Título</th>
                             <th>Descrição</th>
-                            <th>Data</th>
+                            <th>Data de conclusão</th>
                             <th>Animal</th>
                             <th>Status</th>
                         </tr>
@@ -377,9 +377,5 @@
 
         return false
     }
-
-    function limparSessao() {
-        sessionStorage.clear()
-        window.location = "../login.html"
-    }
 </script>
+<script src="js/script.js"></script>
