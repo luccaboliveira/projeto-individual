@@ -313,14 +313,8 @@ body {
     width: 100%;
 }
 
-.card .img{
-    display: flex;
-    justify-content: center;
-    border-radius: 10px;
-}
-
-#icon {
-    width: 30%;
+img#icon {
+    width: 90px;
 }
 
 .div-tabela {
