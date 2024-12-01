@@ -12,8 +12,10 @@ function cadastrarPet(idUsuario, nomePet, dtNasc, sexo, tipo){
 
 function listarPet(fkUsuario) {
     var instrucaoSql = `
-    SELECT id_pet, nome, tipo FROM pet 
-	    WHERE fk_usuario = ${fkUsuario};
+    SELECT 
+    id_pet, nome, tipo, sexo, 
+    datediff(curdate(), dt_nasc) as diferencaDias
+    FROM pet WHERE fk_usuario = ${fkUsuario};
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

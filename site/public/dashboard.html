@@ -114,6 +114,26 @@
                             var id_pet = json[i].id_pet;
                             var nome = json[i].nome;
                             var tipo = json[i].tipo;
+                            var sexo = '';
+                            var idadeDias = json[i].diferencaDias;
+                            var idade = 0
+
+                            if(idadeDias >= 365){
+                                idade = parseInt(idadeDias / 365)
+                                idade = `${idade} ano(s)`
+                            } else if(idadeDias >= 30){
+                                idade = parseInt(idadeDias / 30)
+                                idade = `${idade} meses`
+                            } else{
+                                idade = idadeDias
+                                idade = `${idade} dias`
+                            }
+
+                            if(json[i].sexo == 'M'){
+                                sexo = 'Macho'
+                            } else {
+                                sexo = 'Fêmea'
+                            }
 
                             estruturaCard += `
                             <div class="card" id="card_pet${id_pet}">
@@ -122,7 +142,7 @@
                                 </div>
                                 <div class="texto-card-pet">
                                     <h1>${nome}</h1>
-                                    <div id="kpi_pet${id_pet}">Nenhuma tarefa cadastrada!</div>
+                                    <p>${tipo} | ${sexo} | ${idade}</p>
                                 </div>
                             </div>
                             `
@@ -160,25 +180,24 @@
 
                         var maiorQtd = json[0].maiorQtd
                         var menorQtd = json[0].menorQtd
-
-
+                        
+                        kpi_total.innerHTML = `${json[0].qtdTotal}`
+                        
                         for (var i = 0; i < json.length; i++) {
                             var id_pet = json[i].fk_pet;
-                            var msgPet = document.getElementById(`kpi_pet${id_pet}`)
-                            msgPet.innerHTML = `${json[i].tipo}`;
-
+                            
                             if (maiorQtd == json[i].qtdTarefa) {
                                 kpi_maior.innerHTML = `${json[i].nome}`
                             }
-
+                            
                             if (menorQtd == json[i].qtdTarefa) {
                                 kpi_menor.innerHTML = `${json[i].nome}`
                             }
-
+                            
                             lista_nome.push(json[i].nome);
                             lista_qtdTarefas.push(json[i].qtdTarefa)
                         }
-
+                        
                         lista_status.push(json[0].qtdPendente)
                         lista_status.push(json[0].qtdConcluido)
 

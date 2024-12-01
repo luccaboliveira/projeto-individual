@@ -34,15 +34,16 @@ function atualizarStatus(idTarefa, statusAtual) {
 function buscarQtdTarefa(fkPet, fkUsuario) {
     var instrucaoSql = `
     SELECT 
-    (SELECT max(qtdTarefa) FROM (SELECT COUNT(fk_pet) AS qtdTarefa FROM tarefa WHERE tarefa.fk_usuario = ${fkUsuario} GROUP BY FK_PET) AS qtdTotal) as maiorQtd,
-    (SELECT min(qtdTarefa) FROM (SELECT COUNT(fk_pet) AS qtdTarefa FROM tarefa WHERE tarefa.fk_usuario = ${fkUsuario} GROUP BY FK_PET) AS qtdTotal) as menorQtd,
-    (SELECT count(fk_pet) from tarefa where status_atual = 'Pendente' AND fk_usuario = ${fkUsuario}) as qtdPendente, 
-    (SELECT count(fk_pet) from tarefa where status_atual = 'Concluído' AND fk_usuario = ${fkUsuario}) as qtdConcluido,
+    (SELECT max(qtdTarefa) FROM (SELECT COUNT(fk_pet) AS qtdTarefa FROM tarefa WHERE fk_usuario = ${fkUsuario} GROUP BY FK_PET) AS qtdTotal) AS maiorQtd,
+    (SELECT min(qtdTarefa) FROM (SELECT COUNT(fk_pet) AS qtdTarefa FROM tarefa WHERE fk_usuario = ${fkUsuario} GROUP BY FK_PET) AS qtdTotal) AS menorQtd,
+    (SELECT count(fk_pet) FROM tarefa WHERE status_atual = 'Pendente' AND fk_usuario = ${fkUsuario}) AS qtdPendente, 
+    (SELECT count(fk_pet) FROM tarefa WHERE status_atual = 'Concluído' AND fk_usuario = ${fkUsuario}) AS qtdConcluido,
     (SELECT count(fk_pet) WHERE tarefa.fk_usuario = ${fkUsuario}) AS qtdTarefa,
-    fk_pet, nome, tipo
+    (SELECT count(id_tarefa) from tarefa WHERE tarefa.fk_usuario = ${fkUsuario}) AS qtdTotal,
+    fk_pet, nome
     FROM tarefa JOIN Pet ON fk_pet = id_pet
     WHERE tarefa.fk_usuario = ${fkUsuario}
-    GROUP BY tarefa.FK_PET, pet.nome, pet.tipo;
+    GROUP BY tarefa.fk_pet, nome;
     `
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
