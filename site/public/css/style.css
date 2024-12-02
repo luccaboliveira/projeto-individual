@@ -130,7 +130,7 @@ body {
     padding: 10px 30px 10px 30px;
     background-color: #ffffff;
     border-radius: 20px;
-    /* width: 30%; */
+    width: 35%;
     box-shadow: 5px 5px 5px hsla(235, 44%, 11%, 0.24);
 }
 
@@ -171,6 +171,9 @@ body {
 .container-campos {
     height: 100%;
     justify-items: center;
+}
+.container-campos#campos-cadastro{
+    width: 300px;
 }
 
 .ipt-campo {

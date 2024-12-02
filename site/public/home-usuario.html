@@ -331,7 +331,7 @@
                 })
 
             } else {
-                p_mensagem.innerHTML = `Nenhuma tarefa cadastrada. Insira uma nova tarefa nos campos acima!`
+                p_mensagem.innerHTML = `Nenhuma tarefa cadastrada. Insira uma nova tarefa nos campos acima! <br> <b>Atenção!</b> Para cadastrar uma tarefa, é necessário ter um pet cadastrado.`
                 console.log("Houve um erro ao tentar listar as tarefas!")
 
                 resposta.text().then(texto => {
