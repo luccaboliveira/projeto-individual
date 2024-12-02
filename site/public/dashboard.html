@@ -54,9 +54,9 @@
                     <div class="card" id="cardMetrica">
                         <div id="texto-metricas">
                             <b>Métrica: Percentual de conclusão</b> <br>
-                            Abaixo de 40%: Baixo <br>
-                            Entre 40% e 70%: Razoável <br>
-                            Acima de 70%: Ótimo
+                            <span id="metrica_baixa">Abaixo de 40%: Baixo</span> <br>
+                            <span id="metrica_media">Entre 40% e 70%: Razoável </span><br>
+                            <span id="metrica_alta">Acima de 70%: Ótimo </span>
                         </div>
                     </div>
                     <div class="card" id="kpiRazaoTarefas">
@@ -186,7 +186,15 @@
 
                         var razaoTarefas = parseInt(json[0].qtdConcluido / json[0].qtdTotal * 100)
                         kpi_conclusao.innerHTML = `${razaoTarefas}%`
+                        console.log(razaoTarefas)
 
+                        if(razaoTarefas >= 0 && razaoTarefas < 40){
+                            metrica_baixa.classList.add('texto-destacado')
+                        } else if(razaoTarefas >= 40 && razaoTarefas < 70){
+                            metrica_media.classList.add('texto-destacado')
+                        } else {
+                            metrica_alta.classList.add('texto-destacado')
+                        }
 
                         var lista_nome = []
                         var lista_qtdTarefas = []
